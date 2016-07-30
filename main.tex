@@ -1,0 +1,86 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage{color, colortbl}
+\definecolor{Gray}{gray}{0.8}
+\definecolor{LightRed}{rgb}{0.99,0.9,0.9}
+\usepackage{graphicx}
+\usepackage{algpseudocode}
+\usepackage{graphicx}
+\usepackage{url}
+\usepackage{verbatim}
+%\usepackage{caption}
+%\usepackage{subcaption}
+%\usepackage{textcomp}
+%\usepackage{fancyvrb}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{epstopdf}
+\usepackage[square]{natbib}
+\usepackage[nottoc,numbib]{tocbibind}
+\usepackage[
+      pass
+]{geometry}
+
+\newcommand\todo[1]{\textcolor{red}{#1}}
+
+\begin{document}
+\title{\small Thesis\\\huge Investigating Methods Of Annotating Lifelogs For Use In Search}
+
+\author{Harry Scells - 8857580\\harrisen.scells@connect.qut.edu.au\\\\\small Supervisor - Guido Zuccon\\\small g.zuccon@qut.edu.au\\}
+\maketitle
+\pagebreak
+\tableofcontents
+\pagebreak
+
+\section{Abstract}
+
+\section{Introduction}
+
+What if you had hundreds of thousands of images collected passively throughout the day and you wanted to search for events in this collection? This is a brand new, novel area of research within the domain of information retrieval \todo{[citation needed]}. A range of consumer products allow anyone to capture their daily activities and it is becoming increasingly popular \todo{[citation needed]}. The devices are typically sold under the umbrella term of "lifelogging cameras". Like blogging and vlogging before it, lifelogging is the next step in this series of life event recording devices.
+
+Preliminary research has provided an insight into how difficult searching lifelogging images is. Typical search methodologies are not applicable and, until recently, there have been no freely available collections. Currently, there are no machine learning approaches which can consistently and reliably discover concepts and objects from images. Since the best option is still to annotate images manually using humans, this is what this research aims to assist with. By investigating a number of annotation methodologies and discovering which one most well suits lifelog images, we hope to provide an answer for the best way of annotating a collection of lifelog images. It is hoped that these annotations can be contributed to the wider research community to further the reserach into the field of lifelog search.
+
+Collecting annotations is important, but determining which methodology is the best is a larger challenge. Typical textual evaluation strategies rely on a gold standard annotation. The problem becomes clear - these standard ways of evaluation are not applicable to lifelog annotations. There are currently no ways of evaluating arbitrary types of annotations for lifelog image. Designing a system for evaluating lifelog images and their annotations, and not only the types of annotations being researched by this project, but any type of annotation, will also be an important and meaningful contribution to the research community. 
+
+\subsection{Aims and Objectives}
+
+Four annotation methodologies have been chosen as a basis for this research. Each methodology will involve the collection of annotations through some interface and evaluation. The aim of the project is to determine, through evaluation, the best methodology for annotating lifelog images. Each interface will need to be designed and developed. This will involve a website that will facilitate the collection of these annotations. Evaluation will involve a search task based methodology, whereby the evaluation of annotations is embedded within a search task. 
+
+This research also aims to produce two meaningful contributions to the lifelog research community. Recent results from the NTCIR-12 conference indicate lifelog search engines which incorporate image processing in some way perform much better than simply using annotations alone. A new collection of \textit{well} annotated images as well as training data for image classification systems would hopefully boost the performance for everyone researching lifelog search engines. Secondly, anyone hoping to produce more annotations for a collection of lifelog images may wish to know how effective their annotation methodology is and how well it performs with repsect to others. An easy to use tool for evaluation of lifelog image annotations is a necessity for this new area of research.
+
+\subsection{Research Gaps}
+
+The literature reviewed has revealed a gap in the research. Annotation of lifelog images and the evaluation of them is not a standard process. Through preliminary research, I have investigated a number of techniques which are applicable to annotating images. A number of textual summarisation evaluation methods have also been discovered, however none of these are capable of evaluation without a ground truth or gold standard. Through researching the following two questions, it is hoped that these gaps in the research can be closed.
+
+\subsection{Research Questions}
+
+Two research questions have been identified by looking at previous research efforts in the literature. 
+
+\textbf{Research Question 1:} How can annotations for a collection of lifelog images be evaluated? It is important that the annotations of images are accurate and of a high quality. Low quality annotations will lead to bad evaluation results. Evaluation will be performed without using a gold standard annotation, since this does not exist. In this way, this research will investigate a novel way of evaluating annotations for lifelog images. The most promising way to do this is through extrinsic evaluation, whereby annotations are evaluated by determining the performance of a larger system as a whole with respect to each annotation methodology. In order to keep evaluation fair, a number of baseline retrieval models will be tested to weigh out the differences between them.
+
+\textbf{Research Question 2:} What are the possible ways lifelog images can be annotated? There are many state of the art solutions for automatically summarising the contents of images, however this project will involve manual annotations. This is due to the fact that there does not exist any training data specifically for lifelog images. This makes it challenging to train a model that can identify what is in a lifelog image. It is thought that by manually annotating images, a well formed collection of annotated lifelog images can be produced, as well as data which machine learning and computer vision algorithms can exploit.
+
+\section{Findings From NTCIR}
+
+The NTCIR-12 lifelogging latent semantic access task had four participants contribute to the automatic retrieval component and one participant for the interactive retrieval component. The best performing automatic team, LIG-MRIM, used computer vision to classify images and not rely on the visual concepts distributed with the task. The interactive team (LEMoRe) outperformed all other automatic teams, but this was expected as this is generally the case with tasks that have both automatic and interactive components. The other three automatic teams were VTIR, III\&CYUT and QUT (the preliminary work done for this research).
+
+LIG-MRIM used dynamic convolutional neural networks and a multi-class support vector machine (MSVM) in order to classify images. Visual indexing is composed of two parts: three deep convolutional neural network models (AlexNet, GoogleNet and Visual Geometry Grouping (VGG)) process each image. The output is normalised and has principal component analysis (PCA) performed on it. These outputs are then concatenated together. The same normalisation and PCA process is repeated and fed into the MSVM. The output of this is concatenated with the VGG data. The second part involves temporally naming times of the day in order to attempt to extract semanitic meaning from times of the day. While this team submitted runs that fit the definition of automatic for the task, queries were generated manually from the topics by some expert.
+
+III\&CYUT used a traditional textual based approach to lifelog retrieval. A word2vec model for the CAFFE concepts for each image was used to try to add more semantic meaning to each image. Query expansion was also used on every keyword.
+
+The VTIR team attempted to exploit location metadata in the images. This team choose 3000 images randomly and labelled them with a rich semantic location ontology. More concepts were added by applying the WordNet database to find cognitive synonyms.
+
+Finally, the LEMoRe team, which used an interactive approach, combined existing technologies and methodologies in order to develop a search engine. Colour correlogram, edge histogram, joint composite descriptor and pyramid histogram of oriented graphics are used by the image retrieval system as features to retrieve images. Both a novice and an expert used the system to produce runs.
+\section{Literature Review}
+
+\section{Methods}
+
+\section{Results}
+
+\section{Discussion}
+
+\section{Conclusions}
+
+\bibliographystyle{abbrv}
+\bibliography{thesis}
+
+\end{document}
