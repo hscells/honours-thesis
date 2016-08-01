@@ -43,13 +43,22 @@ Collecting annotations is important, but determining which methodology is the be
 
 \subsection{Aims and Objectives}
 
-Four annotation methodologies have been chosen as a basis for this research. Each methodology will involve the collection of annotations through some interface and evaluation. The aim of the project is to determine, through evaluation, the best methodology for annotating lifelog images. Each interface will need to be designed and developed. This will involve a website that will facilitate the collection of these annotations. Evaluation will involve a search task based methodology, whereby the evaluation of annotations is embedded within a search task. 
+Four annotation methodologies have been chosen as a basis for this research. Each methodology will involve the collection of annotations through some interface and evaluation. The aim of the project is to determine, through evaluation, the best methodology for annotating lifelog images. The four methodologies under investigation are: 
 
-This research also aims to produce two meaningful contributions to the lifelog research community. Recent results from the NTCIR-12 conference indicate lifelog search engines which incorporate image processing in some way perform much better than simply using annotations alone. A new collection of \textit{well} annotated images as well as training data for image classification systems would hopefully boost the performance for everyone researching lifelog search engines. Secondly, anyone hoping to produce more annotations for a collection of lifelog images may wish to know how effective their annotation methodology is and how well it performs with repsect to others. An easy to use tool for evaluation of lifelog image annotations is a necessity for this new area of research.
+\begin{enumerate}
+    \item Tags --- Sets of keywords that describe objects and semantics of an image. Tags are chosen from a user-defined, non persistent vocabulary.
+    \item Textual Descriptions --- Descriptive long-form annotations that contain semantic meaning.
+    \item Relevance Assessments --- Images are scored on a 0-10 scale by how relevant the image relates to a given concept.
+    \item Reverse Queries --- Queries are formulated for a given search result listing. Annotators are asked to provide a query that they think would result in the image being returned by a typical search engine.
+\end{enumerate}
+
+In order to collect annotations, an interface will need to be designed and developed. This will involve a website that will facilitate the collection of these annotations. Evaluation will involve a novel methodology, whereby the evaluation of annotations is embedded within a search task. 
+
+This research also aims to produce two meaningful contributions to the lifelog research community. Recent results from the NTCIR-12 conference indicate lifelog search engines which incorporate image processing in some way perform much better than simply using annotations alone. A new collection of \textit{well} annotated images as well as training data for image classification systems would hopefully boost the performance for everyone researching lifelog search engines. Secondly, anyone hoping to produce more annotations for a collection of lifelog images may wish to know how effective their annotation methodology is and how well it performs with respect to others. An easy to use tool for evaluation of lifelog image annotations is a necessity for this new area of research.
 
 \subsection{Research Gaps}
 
-The literature reviewed has revealed a gap in the research. Annotation of lifelog images and the evaluation of them is not a standard process. Through preliminary research, I have investigated a number of techniques which are applicable to annotating images. A number of textual summarisation evaluation methods have also been discovered, however none of these are capable of evaluation without a ground truth or gold standard. Through researching the following two questions, it is hoped that these gaps in the research can be closed.
+The literature reviewed has revealed two gaps in the research. Annotation of lifelog images and the evaluation of them is not a standard process. Through preliminary research, a number of techniques have been investigated which are applicable to annotating images. A number of textual summarisation evaluation methods have also been discovered, however none of these are capable of evaluation without a ground truth or gold standard. Through researching the following two questions, it is hoped that these gaps in the research can be closed.
 
 \subsection{Research Questions}
 
@@ -72,7 +81,22 @@ The VTIR team attempted to exploit location metadata in the images. This team ch
 Finally, the LEMoRe team, which used an interactive approach, combined existing technologies and methodologies in order to develop a search engine. Colour correlogram, edge histogram, joint composite descriptor and pyramid histogram of oriented graphics are used by the image retrieval system as features to retrieve images. Both a novice and an expert used the system to produce runs.
 \section{Literature Review}
 
+\textbf{lit review goes here}
+
 \section{Methods}
+
+\subsection{Collecting Annotations}
+
+A set of web application interfaces are used for the collection of annotations. Each interface will provide a means for an annotator to assign the respective annotation type to an image from the list of unannotated images. The architecture of these interfaces consists of:
+\begin{enumerate}
+    \item A database to store the annotations and the collection of images. The database will also store information about each user performing the annotations and who annotated which image. This ensures there is a record of who annotated each image, and allows for some type of analysis to be performed at a later stage.
+    \item A web server that handles the "business logic". This web server exposes some password protected RESTful services that applications can hook into.
+    \item Some web pages which consume the API provided by the web server and present view logic. This is the layer that annotators will interact with directly. Each interface will be one of these views.
+\end{enumerate}
+
+Annotations are inserted into the database, which can then be exported and used further down the line for other purposes such as  classifier training and evaluation. 
+
+\subsection{Evaluating Annotations}
 
 \section{Results}
 
