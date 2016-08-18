@@ -26,7 +26,7 @@
 \begin{document}
 \title{\small Thesis\\\huge Investigating Methods Of Annotating Lifelogs For Use In Search}
 
-\author{Harry Scells - 8857580\\harrisen.scells@connect.qut.edu.au\\\\\small Supervisor - Guido Zuccon\\\small g.zuccon@qut.edu.au\\}
+\author{Harry Scells\\harrisen.scells@connect.qut.edu.au\\\\\small Supervisor - Guido Zuccon\\\small g.zuccon@qut.edu.au\\}
 \maketitle
 \pagebreak
 \tableofcontents
@@ -112,13 +112,33 @@ There are four annotation types under investigation. Each one is very different 
 
 Each type of annotation is collected in a very similar way. An expert annotator is shown an image from the sampled collection and is asked to provide an annotation (or in the case of relevance assessment, multiple annotations) for the image. The interfaces used for collecting annotations are pictured and described as follows:
 
+\newpage
 \textbf{Textual}
 
+\includegraphics[width=\textwidth]{images/text-interface}
+
+Here, annotations are collected using a text box. Free form text can be entered by the expert annotator. Textual queries should contain semantic information about an image, and should describe the image with as much detail as possible. These annotations are very similar to a textual document in a typical web search engine, which is why they were selected as one of the methodologies to investigate. These annotations may not be the best for training an image classifier, but it is hypothesised that they will perform the best in a search task.
+
+\newpage
 \textbf{Tags}
 
+\includegraphics[width=\textwidth]{images/tag-interface}
+
+Tags are collected through a specifically designed interface. These vocabulary of tags is created from previously added tags, meaning the list of tags available is arbitrary and can be expanded. In terms of evaluation, tags may be the opposite of textual annotations; intuitively tags should be the best at training an image classifier and are expected to perform the worst when embedded a search task. Tags, however, may be very good at boosting the performance of other annotation types in the search task when combined. For instance, searching on the text \textit{and} tags fields may increase the scores of text annotation alone.
+
+\newpage
+\textbf{Reverse Query}
+
+\includegraphics[width=\textwidth]{images/query-interface}
+
+In this interface, user queries are collected by presenting an image taken from the lifelog camera and asking the annotator to provide a query with what they expect to be returned by a typical search engine. This is a relatively new and novel way to annotating \textit{any} type of document or image \todo{citation needed} and therefore it is unknown how well the collected queries will perform in search or for training an image classifier. The level of detail in these annotations will be very low, since most queries are very short \todo{citation needed}; therefore when training an image classifier, it is expected that queries will not do very well.
+
+\newpage
 \textbf{Relevance Assessment}
 
-\textbf{Reverse Query}
+\includegraphics[width=\textwidth]{images/rel-ass-interface}
+
+Relevance assessment involves presenting an annotator with an image, and asking them to judge how relevant a concept is to the image. These annotations will be collected last, since the list of concepts does not exist yet. It was originally planned that the concepts would be formed using a process that involved the topics from the NTCIR-12 data set. This, however, is not ideal, since the clustering process mentioned above may filter out all of the images which are relevant to a topic. It is for this reason that this annotation type will be collected last. The concepts will be formed from a combination of the previous annotations.\todo{expand on why}
 
 \subsection{Evaluation}
 
