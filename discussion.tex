@@ -1,1 +1,18 @@
-\section{Discussion}
+\chapter{Discussion}
+
+- how to the terms that appeared in the annotations reflect on the actual images? Most commonly occurring terms, least commonly occurring terms.
+
+- term frequency ad hears to Zipf law, the overlap between terms in the NTCIR formal queries and the annotations is quite high
+
+- While there is an overlap of the terms in the annotations and queries, this does not necessarily mean that the terms in the annotations are used within the same context. This is particularly evident in the tag annotations. The term `key' is relevant to a query where the person wearing a lifelog camera is getting a key replaced, but the term was also found within the context of someone using a `key card' to enter their office.
+
+- even though images are chosen from random from a smaller pool of images, it simply was not enough to pick at random. The qrels identified 6657 images that should be relevant. From here, the pool of sampled images only contains 1179 images. Only 17.7\% of the images in the images chosen by clustering can be annotated.
+
+- It seems like using automatic captioning with a pre-trained model (Karpathy) does not impact the search results. This could be because the captions are very generic and do not get specific enough to be relevant for the topics. \todo{Do the captions trained on the collected annotaions have any impact on the performance? It would seem like they should - since the annotations are *for* the images and not some general set of images. I don't expect the performance to be very good right now since not all the topics are being covered by the annotations}
+
+
+The topics were not designed to have images annotated individually out of order. Topics were designed with a range of images that are relevant, or a `moment' of images. 
+
+differences between each annotation methodology - All of them are very different to each other, which presents some interesting problems such as how long it takes to annotate each image, how can each annotation methodology be evaluated etc
+
+There are four annotation types under investigation. Each one is very different to the last and some interesting comparisons will hopefully be able to be drawn. There have been no studies into the most effective methodology or set of methodologies for annotating lifelog images. It would be nice to investigate more than four, however due to time constraints this is inconceivable.

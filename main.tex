@@ -1,12 +1,11 @@
-\documentclass[12pt,a4paper]{article}
+\documentclass[12pt,a4paper]{book}
 \usepackage[titletoc,toc,title]{appendix}
-\usepackage{color, colortbl}
-\definecolor{Gray}{gray}{0.8}
-\definecolor{LightRed}{rgb}{0.99,0.9,0.9}
+\usepackage{color}
+\usepackage{colortbl}
 \usepackage{graphicx}
 \usepackage{algpseudocode}
 \usepackage{graphicx}
-\usepackage{url}
+% \usepackage{url}
 \usepackage{verbatim}
 %\usepackage{caption}
 %\usepackage{subcaption}
@@ -15,11 +14,15 @@
 \usepackage{graphicx}
 \usepackage{amssymb}
 \usepackage{epstopdf}
-\usepackage[square]{natbib}
+\usepackage{hyperref}
+\usepackage{adjustbox}
+\usepackage{subfig}
+%\usepackage[square]{natbib}
 \usepackage[nottoc,numbib]{tocbibind}
-\usepackage[
-      pass
-]{geometry}
+\usepackage[pass]{geometry}
+
+\definecolor{Gray}{gray}{0.8}
+\definecolor{LightRed}{rgb}{0.99,0.9,0.9}
 
 \newcommand\todo[1]{\textcolor{red}{#1}}
 
@@ -39,14 +42,13 @@
 \input{discussion.tex}
 \input{future.tex}
 
-\section{Conclusions}
+\chapter{Conclusions}
 
-\begin{appendices}
-\renewcommand\thetable{\thesection\arabic{table}}
-\renewcommand\thefigure{\thesection\arabic{figure}}
-\section{Format of Collection} \label{app:format}
-
-\end{appendices}
+% \begin{appendices}
+% \renewcommand\thetable{\thesection\arabic{table}}
+% \renewcommand\thefigure{\thesection\arabic{figure}}
+% \section{Format of Collection} \label{app:format}
+% \end{appendices}
 
 \bibliographystyle{abbrv}
 \bibliography{thesis}
