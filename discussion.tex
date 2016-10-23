@@ -1,18 +1,31 @@
 \chapter{Discussion}
 
-- how to the terms that appeared in the annotations reflect on the actual images? Most commonly occurring terms, least commonly occurring terms.
+The results from these experiments indicate that of all the types of annotation methodologies, the query annotations provide the best performance also at the lowest cost (i.e the time it took to annotate). It can be seen, however, that by using multiple annotations can increase the interpolated precision as recall approaches 1. It is not surprising to see the tag annotations performing badly, since they simply cannot encode semantic meaning like text and queries, for instance images in the topic `Building a Computer': the term `building' can have more than one meaning, a physical structure and the act of assembling something. The tag annotations did very poorly in this topic, where the textual annotations did the best -- these contain semantics which the search engine can exploit when ranking images.  What is surprising, is that in some situations assessment annotations performed better (however this is most likely due to the fact that there are not many annotations that are not considered relevant). This is most likely do to the fact that the weights of annotated concepts allow the search engine to rank these documents higher. 
 
-- term frequency ad hears to Zipf law, the overlap between terms in the NTCIR formal queries and the annotations is quite high
+In retrospective, the concepts for each query should have been chosen manually based on the topics since some concepts were not present leading to not some topics not having any relevant images. At the time of choosing concepts for use in relevance assessment, there was a large overlap with the titles and the descriptions of the topics and this was seen as good enough. Prior to analysing the results of the relevance assessment annotations, it was thought that they might perform only as well as the images retrieved using tag annotations. Like tags, the concepts of the relevance assessments do not contain semantic meaning; however unlike tags, each concept is assigned a weighting of how relevant it is to an image. In assigning weights, the concepts assigned to images are contextualised; now `building' is highly relevant \textbf{and} `computer' is highly relevant, as opposed to another image that may have an equally high weight for `building' but a high weight for `architecture'. The image with the high `computer' concept will be ranked higher because of the weighting; this explains why relevance assessments outperforms the tagging approach even though less topics were retrieved. The trade-off in the end is that tagging takes half as long for the same if not worse retrieval performance.
 
-- While there is an overlap of the terms in the annotations and queries, this does not necessarily mean that the terms in the annotations are used within the same context. This is particularly evident in the tag annotations. The term `key' is relevant to a query where the person wearing a lifelog camera is getting a key replaced, but the term was also found within the context of someone using a `key card' to enter their office.
+The topics themselves it seems were not originally intended to have individual images annotated. Relevant images in a topic are actually a group of images or a `moment'. Each topic has several relevant moments, of which some contain images that do not seem to be relevant to the topic at all. As a general rule these images that did not look relevant, even though they were considered to be by the task organisers were not annotated as relevant. For instance, in the topic `Conversation while eating', the lifelogger often wipes his mouth with a serviette blocking the camera. Images such as these were not assigned any annotation. Grouping images into moments may have also sped up the annotation process; annotating several images considered to be a moment might not only have made collecting annotations less tedious and time consuming, but could also have allowed for more images to be annotated. The downside to this however may have been that these irrelevant images crop up inside each moment. One way to avoid a situation like this would be to let the annotator simply remove any images which are covered by objects or too blurry to make anything out.
+
+The interfaces themselves also went through many changes, both big and small. The biggest change from the initial design was for the relevance assessment interface as seen in Figure \ref{fig:new-rel-ass}.
+
+\begin{figure}[hbt]
+    \centering
+    \includegraphics[width=0.95\textwidth]{images/new-rel-ass-interface}
+    \caption{Updated query annotation interface}
+    \label{fig:new-rel-ass}
+\end{figure}
+
+In total, there are only 6657 images which the NTCIR-12 LSAT organisers considered to be relevant; from a collection of 88,125 images in total. If images were only annotated from the clustering method of sampling images which contains 1179 images, only 17.7\% of the data set could be annotated, and it is unknown just how many of these images are actually relevant. This is why the second method of sampling images is so important -- it ensures that there are enough relevant images to retrieve so that the annotation methodologies can be compared.
+
+% - term frequency ad hears to Zipf law, the overlap between terms in the NTCIR formal queries and the annotations is quite high
+
+% - While there is an overlap of the terms in the annotations and queries, this does not necessarily mean that the terms in the annotations are used within the same context. This is particularly evident in the tag annotations. The term `key' is relevant to a query where the person wearing a lifelog camera is getting a key replaced, but the term was also found within the context of someone using a `key card' to enter their office.
+
+% The topics were not designed to have images annotated individually out of order. Topics were designed with a range of images that are relevant, or a `moment' of images. 
 
 - even though images are chosen from random from a smaller pool of images, it simply was not enough to pick at random. The qrels identified 6657 images that should be relevant. From here, the pool of sampled images only contains 1179 images. Only 17.7\% of the images in the images chosen by clustering can be annotated.
 
 - It seems like using automatic captioning with a pre-trained model (Karpathy) does not impact the search results. This could be because the captions are very generic and do not get specific enough to be relevant for the topics. \todo{Do the captions trained on the collected annotaions have any impact on the performance? It would seem like they should - since the annotations are *for* the images and not some general set of images. I don't expect the performance to be very good right now since not all the topics are being covered by the annotations}
 
-
-The topics were not designed to have images annotated individually out of order. Topics were designed with a range of images that are relevant, or a `moment' of images. 
-
 differences between each annotation methodology - All of them are very different to each other, which presents some interesting problems such as how long it takes to annotate each image, how can each annotation methodology be evaluated etc
 
-There are four annotation types under investigation. Each one is very different to the last and some interesting comparisons will hopefully be able to be drawn. There have been no studies into the most effective methodology or set of methodologies for annotating lifelog images. It would be nice to investigate more than four, however due to time constraints this is inconceivable.

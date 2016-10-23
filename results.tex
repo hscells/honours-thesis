@@ -4,7 +4,7 @@
 
 - display tf and maybe idf graph and table (one with stopwords and one without stopword)
 
-\includegraphics[width=0.95\textwidth]{images/graphs/idf}
+\includegraphics[width=0.95\textwidth]{graphs/idf}
 
 - in total, there were `x` experts annotating images, however not all of these annotators were able to annotate the same number of images. The number of images annotated for each type of annoation methodology is displayed below
 
@@ -37,10 +37,7 @@ Much like tags, this annotation type will be very easy to collect. Formulating a
 
 \section{Retrieval Effectiveness}
 
-- the results of each experiment are detailed below. first, each individual methodology, followed by each combination.\\
-- tables of results go here\\
-- outline the most effective combination here\\
-- use of pre-trained model (Karpathy) for automatically captioning image had no impact on the retrieval performance.
+Each experiment is displayed as a table which provides the results from \verb|trec_eval| and as a precision-recall graph. The results from only the manually annotated images are displayed first. Tables \ref{table:manual-text},  \ref{table:manual-tag}, \ref{table:manual-query}, \ref{table:manual-assessment} display the \verb|trec_eval| results, and the same results but performing search on all of the annotations types in Table \ref{table:manual-all}. These results are visualised as a precision-recall graph in Figure \ref{fig:manual-result}.
 
 \begin{table}[htb]
     \parbox{.45\linewidth}{
@@ -77,7 +74,8 @@ Much like tags, this annotation type will be very easy to collect. Formulating a
 	P\_500 & 0.0434 \\ \hline
 	P\_1000 & 0.0221 \\ \hline
     \end{tabular}
-    \caption{Text}    
+    \caption{Text}
+    \label{table:manual-text}
     }
     \hfill
     \parbox{.45\linewidth}{
@@ -115,6 +113,7 @@ Much like tags, this annotation type will be very easy to collect. Formulating a
 	P\_1000 & 0.0217 \\ \hline
     \end{tabular}
     \caption{Tag}
+    \label{table:manual-tag}
     }
 \end{table}
 
@@ -157,6 +156,7 @@ Much like tags, this annotation type will be very easy to collect. Formulating a
 	P\_1000 & 0.0325 \\ \hline
     \end{tabular}
     \caption{Query}
+    \label{table:manual-query}
     }
     \parbox{.45\linewidth}{
     \begin{tabular}{ | l | l | }
@@ -193,14 +193,54 @@ Much like tags, this annotation type will be very easy to collect. Formulating a
 	P\_1000 & 0.0193 \\ \hline
     \end{tabular}
     \caption{Relevance Assessment}
+    \label{table:manual-assessment}
     }
 \end{table}
 
-These results are visualised in Figure \ref{}
-
-\begin{figure}[!hbt]
+\begin{table}[htb]
     \centering
-    \includegraphics[width=0.95\textwidth]{graphs/task2-confusion-matrix}
-    \caption{Visualisation of confusion matrix as a heat map}
+    \begin{tabular}{ | l | l | }
+    \hline
+    Metric & Score \\ \hline
+    num\_q & 48 \\ \hline
+    num\_ret & 9353 \\ \hline
+    num\_rel & 6708 \\ \hline
+    num\_rel\_ret & 1559 \\ \hline
+    map & 0.6400 \\ \hline
+    gm\_map & 0.4809 \\ \hline
+    Rprec & 0.6428 \\ \hline
+    bpref & 0.6531 \\ \hline
+    recip\_rank & 0.9653 \\ \hline
+    iprec\_at\_recall\_0.00 & 0.9924 \\ \hline
+    iprec\_at\_recall\_0.10 & 0.9317 \\ \hline
+    iprec\_at\_recall\_0.20 & 0.8617 \\ \hline
+    iprec\_at\_recall\_0.30 & 0.7472 \\ \hline
+    iprec\_at\_recall\_0.40 & 0.6434 \\ \hline
+    iprec\_at\_recall\_0.50 & 0.6177 \\ \hline
+    iprec\_at\_recall\_0.60 & 0.5445 \\ \hline
+    iprec\_at\_recall\_0.70 & 0.5077 \\ \hline
+    iprec\_at\_recall\_0.80 & 0.4859 \\ \hline
+    iprec\_at\_recall\_0.90 & 0.4062 \\ \hline
+    iprec\_at\_recall\_1.00 & 0.3854 \\ \hline
+    P\_5 & 0.9292 \\ \hline
+    P\_10 & 0.8750 \\ \hline
+    P\_15 & 0.8250 \\ \hline
+    P\_20 & 0.7781 \\ \hline
+    P\_30 & 0.7090 \\ \hline
+    P\_100 & 0.3000 \\ \hline
+    P\_200 & 0.1613 \\ \hline
+    P\_500 & 0.0648 \\ \hline
+    P\_1000 & 0.0325 \\ \hline
+    \end{tabular}
+    \caption{All manual annotations}
+    \label{table:manual-all}
+\end{table}
+
+\begin{figure}[htb]
+    \centering
+    \includegraphics[width=0.95\textwidth]{graphs/manual-result}
+    \caption{Precision-recall curves for the manual annotations}
     \label{fig:manual-result}
 \end{figure}
+
+\todo{use of pre-trained model (Karpathy) for automatically captioning image had no impact on the retrieval performance.}
