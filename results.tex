@@ -2,39 +2,46 @@
 
 \section{Term Statistics}
 
-- display tf and maybe idf graph and table (one with stopwords and one without stopword)
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.7\textwidth]{graphs/idf-scores}
+    \caption{IDF scores for terms in the annotations}
+    \label{fig:idf-scores}
+\end{figure}
 
-\includegraphics[width=0.95\textwidth]{graphs/idf}
+Concepts chosen for relevance assessment ad hears to Zipf's law. The graph in Figure \ref{fig:idf-scores} illustrates the IDF scores for each of the concepts in the corpus of annotations. Just 40 concepts are shown out of a total of 2041. 
 
-- in total, there were `x` experts annotating images, however not all of these annotators were able to annotate the same number of images. The number of images annotated for each type of annoation methodology is displayed below
+Note that the notion of concepts are different to terms since a concept can contain more than once word (this is possible through tags, where a tag can contain multiple words such as `shopping mall' and `street sign').
 
-
+\FloatBarrier
 \section{Annotation Statistics}
 
-\begin{table}[htb]
+In total, five annotators managed to annotate a total of \todo{10,982} images across all annotation methodologies. Figure \ref{fig:annotator-breakdown} illustrates the number of annotations completed by each annotator. Two annotators accounted for the majority of the annotations, while three others provide an additional \todo{904}. The exact number of each annotation type, the total time it took to annotate each annotation type and the average time it took to annotate is shown in Table \ref{table:annotation-stats}.
+
+\begin{figure}[!htb]
     \centering
-    \begin{adjustbox}{center}
+    \includegraphics[width=0.95\textwidth]{graphs/annotator-breakdown}
+    \caption{Total number of annotations by annotator}
+    \label{fig:annotator-breakdown}
+\end{figure}
+
+\begin{table}[!htb]
+    \centering
     \begin{tabular}{ | l | l | l | l | p{5cm} |}
     \hline
-    & Text & Tags & Query & Relevance Assessment \\ \hline
-    Count & 3172 & 2897 & 3616 & 1305 \\ \hline
-    Average Time & 1 minute & 31 seconds & 16 seconds & 58 seconds \\ \hline
-    Total Time & 2 days, 23 hours & 23 hours, 40 minutes & 15 hours, 10 minutes & 21 hours, 23 minutes \\ \hline
+    Name & Count & Average Time & Total Time \\ \hline
+    Text & 3172 & 1 minute & 2 days, 23 hours \\ \hline
+    Tag & 2897 & 31 seconds & 23 hours, 40 minutes \\ \hline
+    Query & 3616 & 16 seconds & 15 hours, 10 minutes \\ \hline
+    Assessment & 1327 & 58 seconds & 21 hours, 36 minutes \\ \hline
     \end{tabular}
-    \end{adjustbox}
     \caption{Annotation Statistics}
+    \label{table:annotation-stats}
 \end{table}
 
-text
-Textual annotation are the most time consuming annotation type to collect. Many images contain two or more highly relevant events or `important' objects. Describing these can take annotators up to several minutes each. This is opposed to all the other annotation methodologies where most images can be annotated in a minute or less.
+Textual annotations accounted for the most amount of time in the collection process by far. The most number of annotations collected for a methodology were the query annotations. Accounts from annotators noted that the relevance assessments were the most difficult to collect. 
 
-tags
-In terms of evaluation, tags may be the opposite of textual annotations; intuitively tags should be the best at training an image classifier and are expected to perform the worst when embedded a search task. Tags, however, may be very good at boosting the performance of other annotation types in the search task when combined. For instance, searching on the text \textit{and} tags fields may increase the scores of text annotation alone.
-
-query
-and therefore it is unknown how well the collected queries will perform in search or for training an image classifier. The level of detail in these annotations will be very low, since most queries should be short in length.
-Much like tags, this annotation type will be very easy to collect. Formulating a query for an image should not takz a significant amount of time. There is the problem of bias \todo{Is there really? I should investigate this further}
-
+\FloatBarrier
 \section{Retrieval Effectiveness}
 
 Each experiment is displayed as a table which provides the results from \verb|trec_eval| and as a precision-recall graph. The results from only the manually annotated images are displayed first. Tables \ref{table:manual-text},  \ref{table:manual-tag}, \ref{table:manual-query}, \ref{table:manual-assessment} display the \verb|trec_eval| results, and the same results but performing search on all of the annotations types in Table \ref{table:manual-all}. These results are visualised as a precision-recall graph in Figure \ref{fig:manual-result}.

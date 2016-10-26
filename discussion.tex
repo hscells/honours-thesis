@@ -6,16 +6,16 @@ In retrospective, the concepts for each query should have been chosen manually b
 
 The topics themselves it seems were not originally intended to have individual images annotated. Relevant images in a topic are actually a group of images or a `moment'. Each topic has several relevant moments, of which some contain images that do not seem to be relevant to the topic at all. As a general rule these images that did not look relevant, even though they were considered to be by the task organisers were not annotated as relevant. For instance, in the topic `Conversation while eating', the lifelogger often wipes his mouth with a serviette blocking the camera. Images such as these were not assigned any annotation. Grouping images into moments may have also sped up the annotation process; annotating several images considered to be a moment might not only have made collecting annotations less tedious and time consuming, but could also have allowed for more images to be annotated. The downside to this however may have been that these irrelevant images crop up inside each moment. One way to avoid a situation like this would be to let the annotator simply remove any images which are covered by objects or too blurry to make anything out.
 
-The interfaces themselves also went through many changes, both big and small. The biggest change from the initial design was for the relevance assessment interface as seen in Figure \ref{fig:new-rel-ass}.
-
-\begin{figure}[hbt]
+\begin{figure}[h]
     \centering
     \includegraphics[width=0.95\textwidth]{images/new-rel-ass-interface}
     \caption{Updated query annotation interface}
     \label{fig:new-rel-ass}
 \end{figure}
 
-In total, there are only 6657 images which the NTCIR-12 LSAT organisers considered to be relevant; from a collection of 88,125 images in total. If images were only annotated from the clustering method of sampling images which contains 1179 images, only 17.7\% of the data set could be annotated, and it is unknown just how many of these images are actually relevant. This is why the second method of sampling images is so important -- it ensures that there are enough relevant images to retrieve so that the annotation methodologies can be compared.
+The interfaces themselves also went through many changes, both big and small. The biggest change from the initial design was for the relevance assessment interface as seen in Figure \ref{fig:new-rel-ass}. Here, each concept is grouped alphabetically; when one is clicked, assessments are added underneath the image. Here not every caption must be assessed manually. When the next button is clicked, all unassessed captions are automatically considered not relevant.
+
+In total, there are only 6,657 images which the NTCIR-12 LSAT organisers considered to be relevant; from a collection of 88,125 images in total (only 7.5\%). If images were only annotated from the clustering method of sampling images, only 16,014 images (18\% of the data set) could be annotated. Of that, 1,176 images are considered relevant. This is why the second method of sampling images is so important -- the clusters do not provide a good distribution of relevant and non-relevant images to annotate if we just pick at random.
 
 % - term frequency ad hears to Zipf law, the overlap between terms in the NTCIR formal queries and the annotations is quite high
 
@@ -23,9 +23,19 @@ In total, there are only 6657 images which the NTCIR-12 LSAT organisers consider
 
 % The topics were not designed to have images annotated individually out of order. Topics were designed with a range of images that are relevant, or a `moment' of images. 
 
-- even though images are chosen from random from a smaller pool of images, it simply was not enough to pick at random. The qrels identified 6657 images that should be relevant. From here, the pool of sampled images only contains 1179 images. Only 17.7\% of the images in the images chosen by clustering can be annotated.
+% - even though images are chosen from random from a smaller pool of images, it simply was not enough to pick at random. The qrels identified 6657 images that should be relevant. From here, the pool of sampled images only contains 1179 images. Only 17.7\% of the images in the images chosen by clustering can be annotated.
 
-- It seems like using automatic captioning with a pre-trained model (Karpathy) does not impact the search results. This could be because the captions are very generic and do not get specific enough to be relevant for the topics. \todo{Do the captions trained on the collected annotaions have any impact on the performance? It would seem like they should - since the annotations are *for* the images and not some general set of images. I don't expect the performance to be very good right now since not all the topics are being covered by the annotations}
+- It seems like using automatic captioning with a pre-trained model (Karpathy) does not impact the search results. This could be because the captions are very generic and do not get specific enough to be relevant for the topics. \todo{Do the captions trained on the collected annotations have any impact on the performance? It would seem like they should - since the annotations are *for* the images and not some general set of images. I don't expect the performance to be very good right now since not all the topics are being covered by the annotations}
 
 differences between each annotation methodology - All of them are very different to each other, which presents some interesting problems such as how long it takes to annotate each image, how can each annotation methodology be evaluated etc
 
+
+text
+Textual annotation are the most time consuming annotation type to collect. Many images contain two or more highly relevant events or `important' objects. Describing these can take annotators up to several minutes each. This is opposed to all the other annotation methodologies where most images can be annotated in a minute or less.
+
+tags
+In terms of evaluation, tags may be the opposite of textual annotations; intuitively tags should be the best at training an image classifier and are expected to perform the worst when embedded a search task. Tags, however, may be very good at boosting the performance of other annotation types in the search task when combined. For instance, searching on the text \textit{and} tags fields may increase the scores of text annotation alone.
+
+query
+and therefore it is unknown how well the collected queries will perform in search or for training an image classifier. The level of detail in these annotations will be very low, since most queries should be short in length.
+Much like tags, this annotation type will be very easy to collect. Formulating a query for an image should not takz a significant amount of time. There is the problem of bias \todo{Is there really? I should investigate this further}
