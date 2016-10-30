@@ -250,4 +250,46 @@ Each experiment is displayed as a table which provides the results from \verb|tr
     \label{fig:manual-result}
 \end{figure}
 
-\todo{use of pre-trained model (Karpathy) for automatically captioning image had no impact on the retrieval performance.}
+\FloatBarrier
+
+A neural network was trained on the manual textual, tag, and query annotations. The network was able to produce captions for every image in the collection. The automatic captions that were generated were then evaluated in the same way as the manual annotations. 
+
+\begin{table}[h]
+    \centering
+    \begin{tabular}{|c|c|c|c|}
+        \hline
+         Methodology & MAP & RR & P@10 \\ \hline
+         Text & 0.0048 & 0.0248 & 0.0196 \\ \hline
+         Tag & 0.0083 & 0.0184 & 0.022  \\ \hline
+         Query & 0.0076 & 0.0174 & 0.0021 \\ \hline
+         All & 0.0164 & 0.0393 & 0.0169 \\ \hline
+    \end{tabular}
+    \caption{MAP, Reciprocal Rank, and Precision at 10 scores for the learnt annotations}
+    \label{table:learnt-results}
+\end{table}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.95\textwidth]{graphs/learnt-result}
+    \caption{Precision-recall curves for the learnt annotations}
+    \label{fig:manual-result}
+\end{figure}
+
+There is no clear individual annotation methodology that outperforms the others, the scores are too low to indicate this. Combining the three automatic annotations together, however, does seem to increase the overall precision.
+
+\FloatBarrier
+The number of iterations the neural network covered for each annotation methodology is visualised in Figures \ref{fig:val-loss-1} and \ref{fig:val-loss-2}. The results of the automatic captioning do not get better over time --- in fact they get worse.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.95\textwidth]{graphs/initial-validation-loss-history}
+    \caption{Validation loss history (\textless 100,000 iterations)}
+    \label{fig:val-loss-1}
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.95\textwidth]{graphs/validation-loss-history}
+    \caption{Validation loss history (\textgreater 200,000 iterations)}
+    \label{fig:val-loss-2}
+\end{figure}

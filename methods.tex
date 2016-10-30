@@ -62,7 +62,9 @@ These annotations will be collected last, since the list of concepts is formed a
 
 Finally, an attempt to automatically caption images for each annotation methodology is done by exploiting a recent state-of-the-art machine learning image captioning approach~\cite{karpathy2015deep} which has been open sourced\footnote{\url{https://github.com/karpathy/neuraltalk2}}. The architecture of the system consists of the final hidden layer of a convolutional neural network (CNN) which learns features of image regions being fed into a recurrent neural network (RNN) that generates textual descriptions.
 
-A model is trained using 70,000 iterations using the $adam$ optimiser with $\alpha$ set to 0.8 and $\beta$ set to 0.999. The learning rate of the language model is set to 0.0004. More iterations are performed afterwards to fine tune the deep learning architecture, but generally insignificant changes if any are seen in the values of the optimisation function.
+A model is trained in the system described above using the $adam$ optimiser with $\alpha$ set to 0.8 and $\beta$ set to 0.999. The learning rate of the language model is set to 0.0004. More iterations are performed afterwards to fine tune the deep learning architecture, but generally insignificant changes if any are seen in the values of the optimisation function.
+
+
 
 \section{Evaluating Annotations}
 

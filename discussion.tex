@@ -17,7 +17,6 @@ The interfaces themselves also went through many changes, both big and small. Th
 
 In total, there are only 6,657 images which the NTCIR-12 LSAT organisers considered to be relevant; from a collection of 88,125 images in total (only 7.5\%). If images were only annotated from the clustering method of sampling images, only 16,014 images (18\% of the data set) could be annotated. Of that, 1,176 images are considered relevant. This is why the second method of sampling images is so important -- the clusters do not provide a good distribution of relevant and non-relevant images to annotate if we just pick at random.
 
-% - term frequency ad hears to Zipf law, the overlap between terms in the NTCIR formal queries and the annotations is quite high
 
 % - While there is an overlap of the terms in the annotations and queries, this does not necessarily mean that the terms in the annotations are used within the same context. This is particularly evident in the tag annotations. The term `key' is relevant to a query where the person wearing a lifelog camera is getting a key replaced, but the term was also found within the context of someone using a `key card' to enter their office.
 
@@ -25,17 +24,18 @@ In total, there are only 6,657 images which the NTCIR-12 LSAT organisers conside
 
 % - even though images are chosen from random from a smaller pool of images, it simply was not enough to pick at random. The qrels identified 6657 images that should be relevant. From here, the pool of sampled images only contains 1179 images. Only 17.7\% of the images in the images chosen by clustering can be annotated.
 
-- It seems like using automatic captioning with a pre-trained model (Karpathy) does not impact the search results. This could be because the captions are very generic and do not get specific enough to be relevant for the topics. \todo{Do the captions trained on the collected annotations have any impact on the performance? It would seem like they should - since the annotations are *for* the images and not some general set of images. I don't expect the performance to be very good right now since not all the topics are being covered by the annotations}
-
-differences between each annotation methodology - All of them are very different to each other, which presents some interesting problems such as how long it takes to annotate each image, how can each annotation methodology be evaluated etc
+The selection of image to be annotated also intuitively must impact the way a neural network captions images. If a topic contains a diverse range of locations and actions but the images sampled for annotation only cover one of these locations then it seems obvious that many images will get miscaptioned. In hindsight, taking the time to select a variety of perspectives and locations within a moment to cover edge cases might have increased the accuracy of the captions; but it is unclear by how much. It could also be the number of training examples required --- there simply may not have been enough annotations for the neural network to learn (a terrifying thought). One thing that can be said for certain is that the number of training iterations required is not the limiting factor in generating accurate captions. Over 200,000 iterations were performed for the three methodologies, and all of them got worse over time. An acceptable number of iterations for this particular setup appears to fall between 30,000 and 100,000; depending on the type of annotation.
 
 
-text
-Textual annotation are the most time consuming annotation type to collect. Many images contain two or more highly relevant events or `important' objects. Describing these can take annotators up to several minutes each. This is opposed to all the other annotation methodologies where most images can be annotated in a minute or less.
+% differences between each annotation methodology - All of them are very different to each other, which presents some interesting problems such as how long it takes to annotate each image, how can each annotation methodology be evaluated etc
 
-tags
-In terms of evaluation, tags may be the opposite of textual annotations; intuitively tags should be the best at training an image classifier and are expected to perform the worst when embedded a search task. Tags, however, may be very good at boosting the performance of other annotation types in the search task when combined. For instance, searching on the text \textit{and} tags fields may increase the scores of text annotation alone.
 
-query
-and therefore it is unknown how well the collected queries will perform in search or for training an image classifier. The level of detail in these annotations will be very low, since most queries should be short in length.
-Much like tags, this annotation type will be very easy to collect. Formulating a query for an image should not takz a significant amount of time. There is the problem of bias \todo{Is there really? I should investigate this further}
+% text
+% Textual annotation are the most time consuming annotation type to collect. Many images contain two or more highly relevant events or `important' objects. Describing these can take annotators up to several minutes each. This is opposed to all the other annotation methodologies where most images can be annotated in a minute or less.
+
+% tags
+% In terms of evaluation, tags may be the opposite of textual annotations; intuitively tags should be the best at training an image classifier and are expected to perform the worst when embedded a search task. Tags, however, may be very good at boosting the performance of other annotation types in the search task when combined. For instance, searching on the text \textit{and} tags fields may increase the scores of text annotation alone.
+
+% query
+% and therefore it is unknown how well the collected queries will perform in search or for training an image classifier. The level of detail in these annotations will be very low, since most queries should be short in length.
+% Much like tags, this annotation type will be very easy to collect. Formulating a query for an image should not takz a significant amount of time. There is the problem of bias \todo{Is there really? I should investigate this further}
