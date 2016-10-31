@@ -26,6 +26,15 @@ In total, there are only 6,657 images which the NTCIR-12 LSAT organisers conside
 
 The selection of image to be annotated also intuitively must impact the way a neural network captions images. If a topic contains a diverse range of locations and actions but the images sampled for annotation only cover one of these locations then it seems obvious that many images will get miscaptioned. In hindsight, taking the time to select a variety of perspectives and locations within a moment to cover edge cases might have increased the accuracy of the captions; but it is unclear by how much. It could also be the number of training examples required --- there simply may not have been enough annotations for the neural network to learn (a terrifying thought). One thing that can be said for certain is that the number of training iterations required is not the limiting factor in generating accurate captions. Over 200,000 iterations were performed for the three methodologies, and all of them got worse over time. An acceptable number of iterations for this particular setup appears to fall between 30,000 and 100,000; depending on the type of annotation.
 
+The size of the collection and the number of manual annotations is the most likely reason the the poor performance when automatically captioning images. Take for example, the MSCOCO data set~\cite{lin2014microsoft} which contains upwards of 300,000 images with five annotations per image. The number of relevant images in each topics may also be a problem: many topics have a less than 200 relevant images associated with them (around 2\% of the actual collection). The number of images in each topic is reported in Figure \ref{fig:relevant-images}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.95\textwidth]{graphs/relevant-images}
+    \caption{Relevant images in each topic}
+    \label{fig:relevant-images}
+\end{figure}
+
 
 % differences between each annotation methodology - All of them are very different to each other, which presents some interesting problems such as how long it takes to annotate each image, how can each annotation methodology be evaluated etc
 

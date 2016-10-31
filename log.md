@@ -80,3 +80,10 @@ Just had my weekly meeting with Guido. This week I'll be working on doing some m
 I spent this week doing writing and making amendments to my thesis. There was a lot of time spent in this week annotating images. I was able to get all of the textual annotations completed during this week which is a big boost to my morale. Other assignments are starting to creep in but it's fine.
 
 ## Week 12
+This week was spend annotating the rest of the required images. I was able to get a friend to help me out a bunch with these annotations. I spent the entire weekend annotating images. It was so boring but hopefully I will be able to get some good results from it! I got some interface advice from my friend who made the relevance assessment interface much more manageable and allowed both of us to annotate images here much faster. I also added some functions to my code to generate some more tables and graphs which I can start to use in the report. I was also able to start training using neuraltalk2 on the query and tag annotations. After some thinking I couldn't work out a way to train the relevance assessment annotations so I just skipped them.
+
+## Week 13
+I was able to actually start reporting on the results this week. I got a good portion of the results and discussion finished. My findings on the learnt annotations are very disappointing, but I was able to get access to a computer with a beast GPU. Over the weekend I was able to train the query, text and tag annotations for about 300,000 iterations each (normally I do 70,000-100,000 and it takes around 5 days!). Well after looking at the results from this the retrieval scores all go down... A surprising results and I don't really know how to explain it but hopefully there is a reason.
+
+## Week 14
+Crunch time. I am starting to write my future work and conculusion section and I am trying to polish the rest of my thesis. I have a friend who is able to take a look over my thesis and sanity check it for me.
