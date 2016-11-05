@@ -12,7 +12,7 @@ Due to the sheer volume of annotations required to collect in such a short time 
 
 \section{Aims and Objectives}
 
-Four annotation methodologies have been chosen as a basis for this research. Each methodology will involve the collection of annotations through some interface and evaluation. The aim of the project is to determine, through TREC-style evaluation, the best methodology for annotating lifelog images. The four methodologies under investigation are: 
+Four annotation methodologies have been chosen as a basis for this research. Each methodology will involve the collection of annotations through some interface and evaluation. The aim of the project is to determine the best methodology for annotating lifelog images. The four methodologies under investigation are: 
 
 \begin{enumerate}
     \item Tags --- Sets of keywords that describe objects and semantics of an image. Tags are chosen from a user-defined, non persistent vocabulary. These are similar to what one would expect to see on Flickr and other similar sites.
@@ -21,15 +21,19 @@ Four annotation methodologies have been chosen as a basis for this research. Eac
     \item Reverse Queries --- Queries are formulated for a given search result listing. Annotators are asked to provide a query that they think would result in the image being returned by a typical search engine. These are more akin to what one would expect to see in query logs.
 \end{enumerate}
 
-In order to collect annotations, the design and development of interfaces are required. This involves a website that facilitates the collection of these annotations. Once a suitable number of annotations have been collected, each methodology is evaluated. This involves a technique, whereby the evaluation of annotations is embedded within a search task (similar to evaluation in topic modelling). Each annotation methodology is evaluated in the same way --- the system does not change, only the type of annotation. This methodology can be applied or built upon for future work in the area of searching lifelog images.
+In order to collect annotations, the design and development of interfaces are required. This involves interfaces that facilitate the collection of these annotations. Once a suitable number of annotations have been collected, each methodology is evaluated. The evaluation strategies available are explored as part of this research.
 
 This research also aims to produce two meaningful contributions to the lifelog research community. Recent results from the NTCIR-12 conference indicate lifelog search engines which incorporate image processing in some way perform much better than simply using annotations alone~\cite{safadilig2016ligmrim}. A new higher quality collection of annotations for lifelog images as well as training data for image classification systems is expected to boost the performance for everyone researching lifelog search engines. Secondly, anyone wanting to produce more annotations for a collection of lifelog images may wish to know how effective their annotation methodology is and how well it performs with respect to others.
 
-Finally, automatic image captioning is investigated. Here, a state-of-the-art image captioning pipeline is generates captions for images using the manually collected annotations as training data. The end result is a fully annotated collection of lifelog images. Previous attempts at using textual descriptions as annotations~\cite{scells2016qut} resulted in poor, but optimistic results. The automatic approach to annotating all lifelog images in the collection distributed by NTCIR is compared to the previous attempt.
+Finally, automatic image captioning is investigated. Here, a state-of-the-art image captioning pipeline generates captions for images using the manually collected annotations as training data. The end result is a fully annotated collection of lifelog images. Previous attempts at using textual descriptions as annotations~\cite{scells2016qut} resulted in poor, but optimistic results. 
+
+Of the four annotation methodologies selected for investigation, a recommendation is made on the most effective of these and the results of the automatically generated captions are compared to the results of the manually collected annotations. 
 
 \section{Research Gaps}
 
-The literature reviewed has revealed two gaps in the research. Annotation of lifelog images and the evaluation of them is not a standard process. Through preliminary research, a number of techniques have been investigated which are applicable to annotating images. A number of textual summarisation evaluation methods have also been discovered, however none of these are capable of evaluation without a ground truth or gold standard. Through researching the following two questions, it is hoped that these gaps in the research can be closed. According to an examination of evaluation in information retrieval systems~\cite[p. 24]{sanderson2010test}, there has been very little work done to evaluate how good a test collection is. Furthermore, finding all relevant documents to build topics is still the accepted approach for creating a test collection~\cite{cooper1973selecting}.
+Two gaps are identified in the research through reviewing the literature. Annotation of lifelog images and the evaluation of them is not a standard process. Through preliminary research, a number of techniques have been investigated which are applicable to annotating images. A number of textual summarisation evaluation methods have also been discovered, however none of these are capable of evaluation without a ground truth or gold standard. Through researching the following two questions, these research gaps can be closed. According to an examination of evaluation in information retrieval systems~\cite[p. 24]{sanderson2010test}, there has been very little work done to evaluate how good a test collection is. Furthermore, finding all relevant documents to build topics is still the accepted approach for creating a test collection~\cite{cooper1973selecting}.
+
+It is currently unknown which annotation methodology most suits a collection of images for a given TBIR system. This also implies that given a collection of lifelog images, it is unknown which form of annotation methodology for the images results in the best performance. Annotations (in general~\cite{snow2008cheap}) are very expensive to collect in both time and financially, thus determining the most appropriate methodology of annotation prior to collecting annotations is highly important. Through exploring different annotation methodologies this particular research gap can be closed.
 
 \section{Research Questions}
 
@@ -45,4 +49,4 @@ There are many state of the art solutions for automatically summarising the cont
 
 \textbf{Research Question 3:} RQ3: How do annotations generated by current state-of-the-art automatic image captioning techniques compare to the effectiveness of manual annotations?
 
-\todo{todo}
+The captions generated by a state-of-the-art neural network are able to be evaluated in the same way the manual annotations are; the format of the annotations will not differ. The effectiveness of these automatic annotations provides a good comparison to the manually collected annotations and offers insight into how good the manual annotations are as training examples. Unlike the manual annotations, the automatically generated annotations are for the entire collection of lifelog images. 

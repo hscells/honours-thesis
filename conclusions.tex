@@ -18,12 +18,15 @@ The most important change to make if continuing this research is to segment the 
 
 Adding and removing images from each moment in the annotation interfaces is necessary (the sampling process is not likely to perfectly capture all relevant images in a moment i.e there could be outliers on the edges of the moment). One thing that needs further investigation is whether to overlap moments with each other. Is it sensible to annotate images more than once if they appear in moments which overlap?
 
-
 \textbf{Automatic Captioning}
 
 Automatic captioning tools seem to work very well in other domains and it is unfortunate that this research could not exploit them. The number of annotations used as training data is the most likely reason this research could not generate captions effectively. Although diverse in moments and objects, there are still less than 100,000 images in total, with less than 20,000 of these images considered `relevant'. Many topics have less than 100 relevant images so using a data set with more relevant images may improve how images get captioned. 
 
 The retrieval system itself can also be expanded up to combine TBIR and CBIR systems. There has been recent work done to generate images from textual descriptions by Reed et. al~\cite{reed2016generative}; however it looks limited to small categories and the resolution of the generated images are low. It is not difficult to imagine a system which generates images from a query and retrieves using an image similarity technique. As of writing this, the idea is only a pipe dream; the future of automatic captioning and image retrieval of lifelogs is bright.
+
+\textbf{Image sampling}
+
+Given more time, it would be worthwhile investigating other image similarity measures (such as those used by the LEMoRe team ~\cite{de40lemore} at NTCIR-12) to possibly produce a more uniformly distributed sample set.
 
 % There has been some work on generating images based on textual descriptions, but it looks limited to small collections of images, and does not seem to be able to produce large resolution images. In the future, search may be able to be performed by image description->image generation->image matching \todo{this https://github.com/paarthneekhara/text-to-image and the paper should be cited here}
  
