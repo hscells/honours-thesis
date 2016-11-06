@@ -19,22 +19,22 @@ The original intent of the topics perhaps does not to imply that images be annot
     \label{fig:new-rel-ass}
 \end{figure}
 
-The interfaces themselves are iterative and dynamic while collecting annotations; they change often in response to feedback from annotators. The biggest change from the initial design is the relevance assessment interface, as seen in Figure \ref{fig:new-rel-ass}. Now rather than clicking to judge every concept to the image, each concept is grouped alphabetically; when one is clicked, assessments are added underneath the image. Not every caption must be assessed manually: When the next button is clicked, all unassessed captions are automatically considered not relevant.
+The interfaces themselves are iterative and dynamic while collecting annotations; they change often in response to feedback from annotators. The biggest change from the initial design is the relevance assessment interface, as seen in Figure \ref{fig:new-rel-ass}. Now rather than clicking to judge every concept to the image, each concept is grouped alphabetically; when one is clicked, assessments are added underneath the image. Not every caption must be assessed manually: When the next button is clicked, all unassessed captions are automatically considered not relevant. 
 
 \textbf{Automatically Annotating Images}
 
-In total, there are only 6,657 images which the NTCIR-12 LSAT organisers considered to be relevant; from a collection of 88,125 images in total (only 7.5\%). If images were only annotated from the clustering method of sampling images, only 16,014 images (18\% of the data set) could be annotated. Of that, 1,176 images are considered relevant. This is why the second method of sampling images is so important -- the clusters do not provide a good distribution of relevant and non-relevant images to annotate if we just pick at random.
+In total, there are 6,657 images that the NTCIR-12 LSAT organisers consider relevant from a collection of 88,125 images (only 7.5\%). If images are annotated from the clustering method of sampling images, only 16,014 images (18\% of the data set) could be annotated. Of that, 1,176 images are considered relevant. This is why the second method of sampling images is so important -- the clusters do not provide a good enough distribution of relevant and non-relevant images to annotate if we just pick at random. A distribution that consists of more relevant images than non-relevant images (i.e relevant to topics) would appear to be more appropriate if one is interested in using annotations for training data. Intuitively it would also seem that topics with a high number of relevant images perform badly due to a low number of training examples; and topics with a low number of relevant images achieve above $0$ precision at high recall because these topics have all of their images manually annotated (remember that a \textit{maximum} of $30$ images are chosen from the known relevant images). This intuition is made visible in Figure \ref{fig:learnt-queries}. The query annotations are used as a demonstration as they are the most interesting of all the learnt annotation methodologies in that they are able to retrieve the highest number of images.
 
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.95\textwidth]{graphs/learnt-queries}
+    \caption{Breakdown of running the same experiment on topics with a large proportion of relevant images (\textgreater 300), the middle number of relevant images (between 100 and 300), and topics with a low number of relevant images (\textless 100)}
+    \label{fig:learnt-queries}
+\end{figure}
 
-% - While there is an overlap of the terms in the annotations and queries, this does not necessarily mean that the terms in the annotations are used within the same context. This is particularly evident in the tag annotations. The term `key' is relevant to a query where the person wearing a lifelog camera is getting a key replaced, but the term was also found within the context of someone using a `key card' to enter their office.
+The selection of image to be annotated also intuitively impacts the way a neural network captions images. If a topic contains a diverse range of locations and actions but the images sampled for annotation only cover one of these locations then becomes obvious that many images will get mis-captioned. In hindsight, taking the time to select a variety of perspectives and locations within a moment to cover edge cases could increase the accuracy of the captions; but it is unknown by how much. Another factor that contributes to the poor retrieval effectiveness is the number of training examples required --- there simply may not be enough annotations for the neural network to learn. One thing that can be said for certain is that the number of training iterations required is not the limiting factor in generating accurate captions. Over 200,000 iterations were performed for the three methodologies, and all of them got worse over time. An acceptable number of iterations for this particular setup appears to fall between 30,000 and 100,000; depending on the type of annotation.
 
-% The topics were not designed to have images annotated individually out of order. Topics were designed with a range of images that are relevant, or a `moment' of images. 
-
-% - even though images are chosen from random from a smaller pool of images, it simply was not enough to pick at random. The qrels identified 6657 images that should be relevant. From here, the pool of sampled images only contains 1179 images. Only 17.7\% of the images in the images chosen by clustering can be annotated.
-
-The selection of image to be annotated also intuitively must impact the way a neural network captions images. If a topic contains a diverse range of locations and actions but the images sampled for annotation only cover one of these locations then it seems obvious that many images will get miscaptioned. In hindsight, taking the time to select a variety of perspectives and locations within a moment to cover edge cases might have increased the accuracy of the captions; but it is unclear by how much. It could also be the number of training examples required --- there simply may not have been enough annotations for the neural network to learn (a terrifying thought). One thing that can be said for certain is that the number of training iterations required is not the limiting factor in generating accurate captions. Over 200,000 iterations were performed for the three methodologies, and all of them got worse over time. An acceptable number of iterations for this particular setup appears to fall between 30,000 and 100,000; depending on the type of annotation.
-
-The size of the collection and the number of manual annotations is the most likely reason the the poor performance when automatically captioning images. Take for example, the MSCOCO data set~\cite{lin2014microsoft} which contains upwards of 300,000 images with five annotations per image. The number of relevant images in each topics may also be a problem: many topics have a less than 200 relevant images associated with them (around 2\% of the actual collection). The number of images in each topic is reported in Figure \ref{fig:relevant-images}
+The size of the collection and the number of manual annotations is the most likely reason for the poor performance when automatically captioning images. Take for example, the MSCOCO data set~\cite{lin2014microsoft} which contains upwards of 300,000 images with five annotations per image. The number of relevant images in each topic may also be a problem: many topics have a less than 200 relevant images associated with them (around 2\% of the actual collection). The number of images in each topic is detailed in Figure \ref{fig:relevant-images}
 
 \begin{figure}[h]
     \centering
@@ -44,8 +44,14 @@ The size of the collection and the number of manual annotations is the most like
 \end{figure}
 
 
-% differences between each annotation methodology - All of them are very different to each other, which presents some interesting problems such as how long it takes to annotate each image, how can each annotation methodology be evaluated etc
+% - While there is an overlap of the terms in the annotations and queries, this does not necessarily mean that the terms in the annotations are used within the same context. This is particularly evident in the tag annotations. The term `key' is relevant to a query where the person wearing a lifelog camera is getting a key replaced, but the term was also found within the context of someone using a `key card' to enter their office.
 
+% The topics were not designed to have images annotated individually out of order. Topics were designed with a range of images that are relevant, or a `moment' of images. 
+
+% - even though images are chosen from random from a smaller pool of images, it simply was not enough to pick at random. The qrels identified 6657 images that should be relevant. From here, the pool of sampled images only contains 1179 images. Only 17.7\% of the images in the images chosen by clustering can be annotated.
+
+
+% differences between each annotation methodology - All of them are very different to each other, which presents some interesting problems such as how long it takes to annotate each image, how can each annotation methodology be evaluated etc
 
 % text
 % Textual annotation are the most time consuming annotation type to collect. Many images contain two or more highly relevant events or `important' objects. Describing these can take annotators up to several minutes each. This is opposed to all the other annotation methodologies where most images can be annotated in a minute or less.
