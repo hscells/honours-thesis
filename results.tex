@@ -4,16 +4,7 @@
 
 Concepts in the annotations appear appropriate for a typical textual corpus. Figures \ref{fig:idf-scores} and \ref{fig:tf-scores} are what one would expect to see; that is, the distribution is Zipfian~\cite{tullo2003modelling}. Each figure displays 40 of the 2041 terms and concepts in total. Note that the notion of concepts are different to terms since a concept can contain more than once word (this is possible through tags, where a tag can contain multiple words such as `shopping mall' and `street sign').
 
-\begin{figure}[!ht]
-    \centering
-    \includegraphics[width=0.95\textwidth]{graphs/annotator-breakdown}
-    \caption{Total number of annotations by annotator}
-    \label{fig:annotator-breakdown}
-\end{figure}
-
-In total, five annotators managed to annotate a total of 10,982 images across all annotation methodologies. Figure \ref{fig:annotator-breakdown} illustrates the number of annotations completed by each annotator. Two annotators accounted for the majority of the annotations, while three others provide an additional 904. The exact number of each annotation type, the total time it took to annotate each annotation type and the average time it took to annotate is displayed in Table \ref{table:annotation-stats}.
-
-\begin{table}[ht]
+\begin{table}[b]
     \centering
     \begin{tabular}{ | l | l | l | l | p{5cm} |}
     \hline
@@ -27,14 +18,23 @@ In total, five annotators managed to annotate a total of 10,982 images across al
     \label{table:annotation-stats}
 \end{table}
 
-\begin{figure}[ht]
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.95\textwidth]{graphs/annotator-breakdown}
+    \caption{Total number of annotations by annotator}
+    \label{fig:annotator-breakdown}
+\end{figure}
+
+In total, five annotators managed to annotate a total of 10,982 images across all annotation methodologies. Figure \ref{fig:annotator-breakdown} illustrates the number of annotations completed by each annotator. Two annotators accounted for the majority of the annotations, while three others provide an additional 904. The exact number of each annotation type, the total time it took to annotate each annotation type and the average time it took to annotate is displayed in Table \ref{table:annotation-stats}.
+
+\begin{figure}[b]
     \centering
     \includegraphics[width=0.7\textwidth]{graphs/idf-scores}
     \caption{IDF scores for concepts in the annotations}
     \label{fig:idf-scores}
 \end{figure}
 
-\begin{figure}[ht]
+\begin{figure}[b]
     \centering
     \includegraphics[width=0.7\textwidth]{graphs/tf-scores}
     \caption{Term Frequency scores for concepts in the annotations}
@@ -46,36 +46,28 @@ Textual annotations accounted for the highest amount of time taken on average in
 \FloatBarrier
 \section{Retrieval Effectiveness}
 
-Each experiment is displayed as a table which provides the results from \verb|trec_eval| and as a precision-recall graph. The results from only the manually annotated images are displayed first. Table \ref{table:manual-results-title} presents the \verb|trec_eval| results for the four annotation methodologies \textit{and} the result of combining all four of the methodologies. These results are visualised as a precision-recall graph in Figure \ref{fig:manual-result-title}. The query annotations retrieve the most images, however when combining all four collections of annotations together the scores all increase slightly, and a reciprocal rank of $1.0$ is achieved.
+Each experiment is displayed as a table which provides the results from \verb|trec_eval| and as a precision-recall graph. The results from only the manually annotated images are displayed first. Table \ref{table:manual-results} present the \verb|trec_eval| results for the four annotation methodologies \textit{and} the result of combining all four of the methodologies. The difference between each is that Table \ref{table:manual-results} uses the title field from the topics and \ref{table:manual-results} uses the descriptions. The title field is more representative of what a typical query looks like when issued by a user. These results are visualised as a precision-recall graph in Figure \ref{fig:manual-result-title}. The query annotations retrieve the most images, however when combining all four collections of annotations together the scores all increase slightly, and a reciprocal rank of $1.0$ is achieved.
 
 \begin{table}[ht]
     \centering
     \begin{tabular}{|c|c|c|c|c|}
-        \hline
+        \multicolumn{5}{c}{Title}\\ \hline
          Methodology & MAP & RR & P@10 & Relevant Retrieved \\ \hline
-         Text & 0.3442 & 0.9223 & 0.8333 & 1062 \\ \hline
-         Tag & 0.5468 & 0.9578 & 0.8396 & 1040 \\ \hline
-         Query & 0.6400 & 0.9653 & 0.8750 & 1559 \\ \hline
-         Relevance Assessment & 0.4815 & 0.8406 & 0.6917 & 831 \\ \hline
-         All & 0.6495 & 1.000 & 0.9062 & 1612 \\ \hline
-    \end{tabular}
-    \caption{MAP, Reciprocal Rank, and Precision at 10 scores for the manual annotations using titles}
-    \label{table:manual-results-title}
-\end{table}
-
-\begin{table}[ht]
-    \centering
-    \begin{tabular}{|c|c|c|c|c|}
-        \hline
+         Text & 0.3442$^{qc}$ & 0.9223$^{c}$ & 0.8333$^{rc}$ & 1062 \\ \hline
+         Tag & 0.5468$^{qcd}$ & 0.9578$^{d}$ & 0.8396$^{rcd}$ & 1040 \\ \hline
+         Query & 0.6400$^{tgad}$ & 0.9653$^{rd}$ & 0.8750$^{rd}$ & 1559 \\ \hline
+         Relevance Assessment & 0.4815$^{qc}$ & 0.8406$^{qc}$ & 0.6917$^{tgqrd}$ & 831 \\ \hline
+         All & 0.6495$^{tgrc}$ & 1.000$^{ta}$ & 0.9062$^{tgr}$ & 1612 \\ \hline
+         \multicolumn{5}{c}{Description} \\ \hline
          Methodology & MAP & RR & P@10 & Relevant Retrieved \\ \hline
-         Text & 0.5285 & 0.9792 & 0.8521 & 1088 \\ \hline
-         Tag & 0.4627 & 0.8928 & 0.7687 & 1055 \\ \hline
-         Query & 0.4457 & 0.7683 & 0.5958 & 1566 \\ \hline
-         Relevance Assessment & 0.5219 & 0.9271 & 0.7938 & 972 \\ \hline
-         All & 0.5855 & 0.9815 & 0.8875 & 1613 \\ \hline
+         Text & 0.5285$^{gqc}$ & 0.9792$^{gq}$ & 0.8521$^{gqc}$ & 1088 \\ \hline
+         Tag & 0.4627$^{trcd}$ & 0.8928$^{tqcd}$ & 0.7687$^{tqcd}$ & 1055 \\ \hline
+         Query & 0.4457$^{tcd}$ & 0.7683$^{tgrcd}$ & 0.5958$^{tgrcd}$ & 1566 \\ \hline
+         Relevance Assessment & 0.5219$^{c}$ & 0.9271$^{q}$ & 0.7938$^{tqcd}$ & 972 \\ \hline
+         All & 0.5855$^{tgqrc}$ & 0.9815$^{gq}$ & 0.8875$^{tgqr}$ & 1613 \\ \hline         
     \end{tabular}
-    \caption{MAP, Reciprocal Rank, and Precision at 10 scores for the manual annotations using descriptions}
-    \label{table:manual-results-title}
+    \caption{MAP, Reciprocal Rank, and Precision at 10 scores for the manual annotations using titles. Two tails t-test statistical significance ($p<0.05$) is indicated through the following labels for inter-measurement: text $^t$, tags $^g$, query $^q$, relevance assessment $^r$, combined $^c$. Statistical significance between the same methodology for titles and descriptions is represented as $^d$.}
+    \label{table:manual-results}
 \end{table}
 
 \begin{figure}[ht]
@@ -94,7 +86,7 @@ Each experiment is displayed as a table which provides the results from \verb|tr
 
 \FloatBarrier
 
-A neuraltalk2 is trained on the manual textual, tag, and query annotations (i.e after the manual annotates are collected). The neural network architecture is able to produce captions for every image in the collection. The quality of these captions is summarised in Table \ref{table:learnt-results} -- clearly not the most impressive results. The automatic captions that are generated are evaluated in the same way as the manual annotations. The output of the neural network is formatted to be used in the evaluation pipeline as described in Section \ref{methods:evaluating}. 
+A neuraltalk2 is trained on the manual textual, tag, and query annotations (i.e after the manual annotates are collected). The neural network architecture is able to produce captions for every image in the collection. The quality of these captions is summarised in Tables \ref{table:learnt-results-title} and \ref{table:learnt-results-desc} -- clearly not the most impressive results. The automatic captions that are generated are evaluated in the same way as the manual annotations. The output of the neural network is formatted to be used in the evaluation pipeline as described in Section \ref{methods:evaluating}. 
 
 There is no clear individual annotation methodology that outperforms the others, the scores are too low to indicate this. Combining the three automatic annotations together does seem to increase the overall precision. The learnt queries do retrieve the most number of images, in a similar result to the manual annotation results.
 
