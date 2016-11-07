@@ -46,7 +46,7 @@ Textual annotations accounted for the highest amount of time taken on average in
 \FloatBarrier
 \section{Retrieval Effectiveness}
 
-Each experiment is displayed as a table which provides the results from \verb|trec_eval| and as a precision-recall graph. The results from only the manually annotated images are displayed first. Table \ref{table:manual-results} presents the \verb|trec_eval| results for the four annotation methodologies \textit{and} the result of combining all four of the methodologies. These results are visualised as a precision-recall graph in Figure \ref{fig:manual-result}. The query annotations retrieve the most images, however when combining all four collections of annotations together the scores all increase slightly, and a reciprocal rank of $1.0$ is achieved.
+Each experiment is displayed as a table which provides the results from \verb|trec_eval| and as a precision-recall graph. The results from only the manually annotated images are displayed first. Table \ref{table:manual-results-title} presents the \verb|trec_eval| results for the four annotation methodologies \textit{and} the result of combining all four of the methodologies. These results are visualised as a precision-recall graph in Figure \ref{fig:manual-result-title}. The query annotations retrieve the most images, however when combining all four collections of annotations together the scores all increase slightly, and a reciprocal rank of $1.0$ is achieved.
 
 \begin{table}[ht]
     \centering
@@ -56,23 +56,49 @@ Each experiment is displayed as a table which provides the results from \verb|tr
          Text & 0.3442 & 0.9223 & 0.8333 & 1062 \\ \hline
          Tag & 0.5468 & 0.9578 & 0.8396 & 1040 \\ \hline
          Query & 0.6400 & 0.9653 & 0.8750 & 1559 \\ \hline
-         Relevance Assessment & 0.5649 & 0.9504 & 0.8194 & 695 \\ \hline
-         All & 0.6512 & 1.000 & 0.9042 & 1605 \\ \hline
+         Relevance Assessment & 0.4815 & 0.8406 & 0.6917 & 831 \\ \hline
+         All & 0.6495 & 1.000 & 0.9062 & 1612 \\ \hline
     \end{tabular}
-    \caption{MAP, Reciprocal Rank, and Precision at 10 scores for the manual annotations}
-    \label{table:manual-results}
+    \caption{MAP, Reciprocal Rank, and Precision at 10 scores for the manual annotations using titles}
+    \label{table:manual-results-title}
+\end{table}
+
+\begin{table}[ht]
+    \centering
+    \begin{tabular}{|c|c|c|c|c|}
+        \hline
+         Methodology & MAP & RR & P@10 & Relevant Retrieved \\ \hline
+         Text & 0.5285 & 0.9792 & 0.8521 & 1088 \\ \hline
+         Tag & 0.4627 & 0.8928 & 0.7687 & 1055 \\ \hline
+         Query & 0.4457 & 0.7683 & 0.5958 & 1566 \\ \hline
+         Relevance Assessment & 0.5219 & 0.9271 & 0.7938 & 972 \\ \hline
+         All & 0.5855 & 0.9815 & 0.8875 & 1613 \\ \hline
+    \end{tabular}
+    \caption{MAP, Reciprocal Rank, and Precision at 10 scores for the manual annotations using descriptions}
+    \label{table:manual-results-title}
 \end{table}
 
 \begin{figure}[ht]
     \centering
-    \includegraphics[width=0.8\textwidth]{graphs/manual-result}
-    \caption{Precision-recall curves for the manual annotations}
-    \label{fig:manual-result}
+    \includegraphics[width=0.8\textwidth]{graphs/manual-title}
+    \caption{Precision-recall curves for the manual annotations using topic titles}
+    \label{fig:manual-result-title}
+\end{figure}
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.8\textwidth]{graphs/manual-desc}
+    \caption{Precision-recall curves for the manual annotations using topic descriptions}
+    \label{fig:manual-result-desc}
 \end{figure}
 
 \FloatBarrier
 
 A neuraltalk2 is trained on the manual textual, tag, and query annotations (i.e after the manual annotates are collected). The neural network architecture is able to produce captions for every image in the collection. The quality of these captions is summarised in Table \ref{table:learnt-results} -- clearly not the most impressive results. The automatic captions that are generated are evaluated in the same way as the manual annotations. The output of the neural network is formatted to be used in the evaluation pipeline as described in Section \ref{methods:evaluating}. 
+
+There is no clear individual annotation methodology that outperforms the others, the scores are too low to indicate this. Combining the three automatic annotations together does seem to increase the overall precision. The learnt queries do retrieve the most number of images, in a similar result to the manual annotation results.
+
+The number of iterations the neural network covered for each annotation methodology is visualised in Figures \ref{fig:val-loss-1} and \ref{fig:val-loss-2}. The results of the automatic captioning do not get better over time --- in fact they get worse. This is a concerning finding, and it can most likely be attributed the the lack of training examples. The gap between topics with a large number of relevant images and the number of training examples in combination with topics that contain a very low number of relevant images is presumably the contributing factor to these graphs.
 
 \begin{table}[ht]
     \centering
@@ -84,24 +110,37 @@ A neuraltalk2 is trained on the manual textual, tag, and query annotations (i.e 
          Query & 0.0076 & 0.0174 & 0.0021 & 246 \\ \hline
          All & 0.0164 & 0.0393 & 0.0169 & 337 \\ \hline
     \end{tabular}
-    \caption{MAP, Reciprocal Rank, and Precision at 10 scores for the automatically generated annotations}
-    \label{table:learnt-results}
+    \caption{MAP, Reciprocal Rank, and Precision at 10 scores for the automatically generated annotations using titles}
+    \label{table:learnt-results-title}
+\end{table}
+
+\begin{table}[ht]
+    \centering
+    \begin{tabular}{|c|c|c|c|c|}
+        \hline
+         Methodology & MAP & RR & P@10 & Relevant Retrieved\\ \hline
+         Text & 0.0048 & 0.0232 & 0.0167 & 222 \\ \hline
+         Tag & 0.0050 & 0.0184 & 0.0063 & 145 \\ \hline
+         Query & 0.0051 & 0.0062 & 0.0062 & 199 \\ \hline
+         All & 0.0096 & 0.0470 & 0.0187 & 325 \\ \hline
+    \end{tabular}
+    \caption{MAP, Reciprocal Rank, and Precision at 10 scores for the automatically generated annotations using descriptions}
+    \label{table:learnt-results-title}
 \end{table}
 
 \begin{figure}[ht]
     \centering
-    \includegraphics[width=0.8\textwidth]{graphs/learnt-result}
-    \caption{Precision-recall curves for the learnt annotations}
-    \label{fig:manual-result}
+    \includegraphics[width=0.8\textwidth]{graphs/auto-title}
+    \caption{Precision-recall curves for the learnt annotations using titles}
+    \label{fig:manual-result-title}
 \end{figure}
 
-\FloatBarrier
-There is no clear individual annotation methodology that outperforms the others, the scores are too low to indicate this. Combining the three automatic annotations together does seem to increase the overall precision. The learnt queries do retrieve the most number of images, in a similar result to the manual annotation results.
-
-The number of iterations the neural network covered for each annotation methodology is visualised in Figures \ref{fig:val-loss-1} and \ref{fig:val-loss-2}. The results of the automatic captioning do not get better over time --- in fact they get worse. This is a concerning finding, and it can most likely be attributed the the lack of training examples. The gap between topics with a large number of relevant images and the number of training examples in combination with topics that contain a very low number of relevant images is presumably the contributing factor to these graphs.
-
-\vfill
-\FloatBarrier
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.8\textwidth]{graphs/auto-desc}
+    \caption{Precision-recall curves for the learnt annotations using descriptions}
+    \label{fig:manual-result-desc}
+\end{figure}
 
 \begin{figure}
     \centering
