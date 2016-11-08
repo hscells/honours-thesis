@@ -46,10 +46,11 @@ Textual annotations accounted for the highest amount of time taken on average in
 \FloatBarrier
 \section{Retrieval Effectiveness}
 
-Each experiment is displayed as a table which provides the results from \verb|trec_eval| and as a precision-recall graph. The results from only the manually annotated images are displayed first. Table \ref{table:manual-results} present the \verb|trec_eval| results for the four annotation methodologies \textit{and} the result of combining all four of the methodologies. The difference between each is that Table \ref{table:manual-results} uses the title field from the topics and \ref{table:manual-results} uses the descriptions. The title field is more representative of what a typical query looks like when issued by a user. These results are visualised as a precision-recall graph in Figure \ref{fig:manual-result-title}. The query annotations retrieve the most images, however when combining all four collections of annotations together the scores all increase slightly, and a reciprocal rank of $1.0$ is achieved.
+Each experiment is displayed as a table which provides the results from \verb|trec_eval| and as a precision-recall graph. The results from only the manually annotated images are displayed first. Table \ref{table:manual-results} present the \verb|trec_eval| results for the four annotation methodologies \textit{and} the result of combining all four of the methodologies. The difference between each is that Table \ref{table:manual-results} uses the title field from the topics and \ref{table:manual-results} uses the descriptions. The title field is more representative of what a typical query looks like when issued by a user. These results are visualised as precision-recall graphs in Figures \ref{fig:manual-result-title} and \ref{fig:manual-result-desc}.
+
+The interesting result is the experiments that use the title field as an input: the query annotations perform the best of the four methodologies, however when combining all four collections of annotations together the effectiveness increases slightly, and the precision is higher than the query annotations at high recall. Combining annotations for the experiments that use the description field outperform all four of the methodologies, and the query annotations perform significantly worse.
 
 \begin{table}[ht]
-    \centering
     \begin{tabular}{|c|c|c|c|c|}
         \multicolumn{5}{c}{Title}\\ \hline
          Methodology & MAP & RR & P@10 & Relevant Retrieved \\ \hline
@@ -57,14 +58,14 @@ Each experiment is displayed as a table which provides the results from \verb|tr
          Tag & 0.5468$^{qcd}$ & 0.9578$^{d}$ & 0.8396$^{rcd}$ & 1040 \\ \hline
          Query & 0.6400$^{tgad}$ & 0.9653$^{rd}$ & 0.8750$^{rd}$ & 1559 \\ \hline
          Relevance Assessment & 0.4815$^{qc}$ & 0.8406$^{qc}$ & 0.6917$^{tgqrd}$ & 831 \\ \hline
-         All & 0.6495$^{tgrc}$ & 1.000$^{ta}$ & 0.9062$^{tgr}$ & 1612 \\ \hline
+         Combined & 0.6495$^{tgrc}$ & 1.000$^{ta}$ & 0.9062$^{tgr}$ & 1612 \\ \hline
          \multicolumn{5}{c}{Description} \\ \hline
          Methodology & MAP & RR & P@10 & Relevant Retrieved \\ \hline
          Text & 0.5285$^{gqc}$ & 0.9792$^{gq}$ & 0.8521$^{gqc}$ & 1088 \\ \hline
          Tag & 0.4627$^{trcd}$ & 0.8928$^{tqcd}$ & 0.7687$^{tqcd}$ & 1055 \\ \hline
          Query & 0.4457$^{tcd}$ & 0.7683$^{tgrcd}$ & 0.5958$^{tgrcd}$ & 1566 \\ \hline
          Relevance Assessment & 0.5219$^{c}$ & 0.9271$^{q}$ & 0.7938$^{tqcd}$ & 972 \\ \hline
-         All & 0.5855$^{tgqrc}$ & 0.9815$^{gq}$ & 0.8875$^{tgqr}$ & 1613 \\ \hline         
+         Combined & 0.5855$^{tgqrc}$ & 0.9815$^{gq}$ & 0.8875$^{tgqr}$ & 1613 \\ \hline         
     \end{tabular}
     \caption{MAP, Reciprocal Rank, and Precision at 10 scores for the manual annotations using titles. Two tails t-test statistical significance ($p<0.05$) is indicated through the following labels for inter-measurement: text $^t$, tags $^g$, query $^q$, relevance assessment $^r$, combined $^c$. Statistical significance between the same methodology for titles and descriptions is represented as $^d$.}
     \label{table:manual-results}
@@ -86,38 +87,30 @@ Each experiment is displayed as a table which provides the results from \verb|tr
 
 \FloatBarrier
 
-A neuraltalk2 is trained on the manual textual, tag, and query annotations (i.e after the manual annotates are collected). The neural network architecture is able to produce captions for every image in the collection. The quality of these captions is summarised in Tables \ref{table:learnt-results-title} and \ref{table:learnt-results-desc} -- clearly not the most impressive results. The automatic captions that are generated are evaluated in the same way as the manual annotations. The output of the neural network is formatted to be used in the evaluation pipeline as described in Section \ref{methods:evaluating}. 
+A neural network framework (neuraltalk2) is trained on the manual textual, tag, and query annotations (i.e after the manual annotates are collected). Neuraltalk2 is able to produce captions for every image in the collection. The quality of these captions is summarised in Tables \ref{table:learnt-results-title} and \ref{table:learnt-results-desc} -- clearly not the most impressive results. The automatic captions that are generated are evaluated in the same way as the manual annotations. The output of the neural network is formatted to be used in the evaluation pipeline as described in Section \ref{methods:evaluating}. 
 
 There is no clear individual annotation methodology that outperforms the others, the scores are too low to indicate this. Combining the three automatic annotations together does seem to increase the overall precision. The learnt queries do retrieve the most number of images, in a similar result to the manual annotation results.
 
-The number of iterations the neural network covered for each annotation methodology is visualised in Figures \ref{fig:val-loss-1} and \ref{fig:val-loss-2}. The results of the automatic captioning do not get better over time --- in fact they get worse. This is a concerning finding, and it can most likely be attributed the the lack of training examples. The gap between topics with a large number of relevant images and the number of training examples in combination with topics that contain a very low number of relevant images is presumably the contributing factor to these graphs.
+The number of iterations the neural network covered for each annotation methodology is visualised in Figures \ref{fig:val-loss-1} and \ref{fig:val-loss-2}. The results of the automatic captioning do not get better over time -- in fact they get worse. This is a concerning finding, and it can most likely be attributed the the lack of training examples. The gap between topics with a large number of relevant images and the number of training examples in combination with topics that contain a very low number of relevant images is presumably the contributing factor to these graphs.
 
 \begin{table}[ht]
     \centering
     \begin{tabular}{|c|c|c|c|c|}
-        \hline
+        \multicolumn{5}{c}{Title}\\ \hline
          Methodology & MAP & RR & P@10 & Relevant Retrieved\\ \hline
          Text & 0.0048 & 0.0248 & 0.0196 & 187 \\ \hline
-         Tag & 0.0083 & 0.0184 & 0.0022 & 136 \\ \hline
+         Tag & 0.0083$^{c}$ & 0.0184 & 0.0022 & 136 \\ \hline
          Query & 0.0076 & 0.0174 & 0.0021 & 246 \\ \hline
-         All & 0.0164 & 0.0393 & 0.0169 & 337 \\ \hline
-    \end{tabular}
-    \caption{MAP, Reciprocal Rank, and Precision at 10 scores for the automatically generated annotations using titles}
-    \label{table:learnt-results-title}
-\end{table}
-
-\begin{table}[ht]
-    \centering
-    \begin{tabular}{|c|c|c|c|c|}
-        \hline
+         Combined & 0.0164$^{g}$ & 0.0393 & 0.0169 & 337 \\ \hline
+        \multicolumn{5}{c}{Description}\\ \hline
          Methodology & MAP & RR & P@10 & Relevant Retrieved\\ \hline
          Text & 0.0048 & 0.0232 & 0.0167 & 222 \\ \hline
          Tag & 0.0050 & 0.0184 & 0.0063 & 145 \\ \hline
          Query & 0.0051 & 0.0062 & 0.0062 & 199 \\ \hline
-         All & 0.0096 & 0.0470 & 0.0187 & 325 \\ \hline
+         Combined & 0.0096 & 0.0470 & 0.0187 & 325 \\ \hline
     \end{tabular}
-    \caption{MAP, Reciprocal Rank, and Precision at 10 scores for the automatically generated annotations using descriptions}
-    \label{table:learnt-results-title}
+    \caption{MAP, Reciprocal Rank, and Precision at 10 scores for the automatically generated annotations using descriptions. Two tails t-test statistical significance ($p<0.05$) is indicated through the following labels for inter-measurement: text $^t$, tags $^g$, query $^q$, relevance assessment $^r$, combined $^c$. Statistical significance between the same methodology for titles and descriptions is represented as $^d$.}
+    \label{table:learnt-results}
 \end{table}
 
 \begin{figure}[ht]
