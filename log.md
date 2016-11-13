@@ -86,4 +86,7 @@ This week was spend annotating the rest of the required images. I was able to ge
 I was able to actually start reporting on the results this week. I got a good portion of the results and discussion finished. My findings on the learnt annotations are very disappointing, but I was able to get access to a computer with a beast GPU. Over the weekend I was able to train the query, text and tag annotations for about 300,000 iterations each (normally I do 70,000-100,000 and it takes around 5 days!). Well after looking at the results from this the retrieval scores all go down... A surprising results and I don't really know how to explain it but hopefully there is a reason.
 
 ## Week 14
-Crunch time. I am starting to write my future work and conculusion section and I am trying to polish the rest of my thesis. I have a friend who is able to take a look over my thesis and sanity check it for me.
+Crunch time. I am starting to write my future work and conculusion section and I am trying to polish the rest of my thesis. I have a friend who is able to take a look over my thesis and sanity check it for me. I also did my presentation this week which I think was done pretty well. I still haven't got my thesis looked at by Guido but it's fine I'm sure he will give me some feedback.
+
+## Week 15
+This week I didn't get much time to write because I was studying for my exam. I was able to get an extension to finish my thesis because Guido needs to take a look at it. The study for the exam was really draining. I was able to do more writing this weekend due to the extension and edit my thesis based on the feedback.

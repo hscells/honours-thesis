@@ -13,4 +13,13 @@ The VTIR team~\cite{xia2016vtir} attempted to exploit location metadata associta
 
 Finally, the LEMoRe~\cite{de40lemore} team, which used an interactive approach, combined existing technologies and methodologies in order to develop a search engine. Colour correlogram, edge histogram, joint composite descriptor and pyramid histogram of oriented graphics are used by the image retrieval system as features to retrieve images. Both a novice and an expert used the system to produce runs.
 
-The results from this pilot task offer a promising glimpse into the future of searching lifelog images. LIG-MRIM shows that automatic methods for annotating lifelog images can result in decent text-based image retrieval effectiveness. The teams that did not perform so well (including the QUT team) offer insight into areas of research to avoid.
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.95\textwidth]{graphs/ntcir-pr-curve}
+    \caption{Precision-recall curves for the four LSAT teams}
+    \label{fig:ntcir-results}
+\end{figure}
+
+The results from this pilot task offer a promising glimpse into the future of searching lifelog images. Figure \ref{fig:ntcir-results} presents the best run from each of the teams that participated in NTCIR-12 LSAT. LIG-MRIM shows that automatic methods for annotating lifelog images can result in decent text-based image retrieval effectiveness. The teams that do not perform well (including the QUT team) offer insight into areas of research to avoid. 
+
+The difference in retrieval effectiveness between LIG-MRIM and the other three teams is highly likely due to the annotations of the images. The task provides teams with automatically generated annotations for the images distributed with the task. These annotations are generated using a previously state-of-the-art captioning framework, CAFFE~\cite{jia2014caffe}. The problem lies within the fact that a CAFFE model is trained on a data set that does not align with the lifelog images. Three of the teams use these annotations in their systems; however LIG-MRIM generate their own annotations. This indicates that no matter how well tuned and suited a text-based image retrieval system is to lifelog images, poor textual representations for images can significantly impact the retrieval effectiveness.
