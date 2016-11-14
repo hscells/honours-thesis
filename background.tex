@@ -5,7 +5,7 @@ This chapter presents a background on the current state of searching lifelog ima
 \input{litreview.tex}
 
 \section{Findings From NTCIR}
-The NTCIR-12 lifelogging latent semantic access pilot task consisted of four participants contributing to the automatic retrieval component and one participant in the interactive retrieval component. The highest performing automatic team, LIG-MRIM, used computer vision to classify images and not rely on the visual concepts distributed with the task. The interactive team (LEMoRe) outperformed all other automatic teams, but this is expected as is generally the case with tasks that contain both automatic and interactive components. The other three automatic teams are VTIR, III\&CYUT and QUT (the preliminary work done for this research).
+The NTCIR-12 lifelogging latent semantic access pilot task consisted of four research teams contributing to the automatic retrieval component and one participant in the interactive retrieval component. The highest performing automatic team, LIG-MRIM, used computer vision to classify images and not rely on the visual concepts distributed with the task. The interactive team (LEMoRe) outperformed all other automatic teams, but this is expected as is generally the case with tasks that contain both automatic and interactive components. The other three automatic teams are VTIR, III\&CYUT and QUT (the preliminary work done for this research).
 
 LIG-MRIM~\cite{safadilig2016ligmrim} used dynamic convolutional neural networks and a multi-class support vector machine (MSVM) in order to classify images. Visual indexing is composed of two parts: three deep convolutional neural network models (AlexNet, GoogleNet and Visual Geometry Grouping (VGG)) process each image. The output is normalised and has principal component analysis (PCA) performed on it. These outputs are then concatenated together. The same normalisation and PCA process is repeated and fed into the MSVM. The output of this is concatenated with the VGG data. The second part involves temporally naming times of the day in order to attempt to extract semanitic meaning from times of the day. While this team submitted runs that fit the definition of automatic for the task, queries were generated manually from the topics by an expert.
 
@@ -13,9 +13,11 @@ III\&CYUT~\cite{lin2016image} used a traditional textual based approach to lifel
 
 The VTIR team~\cite{xia2016vtir} attempted to exploit location metadata associtaed with the images. To this end 3,000 random images were labelled against a rich semantic location ontology. More concepts were utilised by applying the WordNet database to find cognitive synonyms. Despite the additional annotations, this system failed to provide good retrieval effectiveness.
 
+The QUT team~\cite{scells2016qut} manually annotated a subset of the collection's images with long textual descriptions. To select images for annotation, they followed an approach based on temporal and visual clustering of the images. They however further extend the annotation process by propagating the annotations to other images contained within the same cluster of already annotated images.
+
 Finally, the LEMoRe~\cite{de40lemore} team, which used an interactive approach, combined existing technologies and methodologies in order to develop a search engine. Colour correlogram, edge histogram, joint composite descriptor and pyramid histogram of oriented graphics are used by the image retrieval system as features to retrieve images. Both a novice and an expert used the system to produce runs.
 
-\begin{figure}[h]
+\begin{figure}[t]
     \centering
     \includegraphics[width=0.95\textwidth]{graphs/ntcir-pr-curve}
     \caption{Precision-recall curves for the four LSAT teams}
