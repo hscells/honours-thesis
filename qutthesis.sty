@@ -1,0 +1,943 @@
+% QUT PhD thesis style -- modifications to the report style 
+% This is unofficial so you should always double check against the
+% Registrar's office rules
+%         
+% Developed by Yu-Chu Tian in March 2010
+% This style is used as a package in LaTex2e under the documentclass "report".
+
+% This style file is provided ``as is" without express or implied warranty. 
+% Permission is granted to PhD and Research Masters students for personal 
+% use on any computer systems, subject to the following restrictions:
+%
+% 1. The author is not responsible for the consequences of use of this style file.
+% 2. Modification is allowed to this style file provided the modified version is 
+%    marked as such. 
+% 3. This notice is to remain intact.
+%
+
+%%%%%
+%%%%%   PRELIMS
+%%%%%
+
+\typeout{Document Style Option `qutthesis' for latex2e <$Date: 09/25/2002 $>.} %25 Sept 2002
+\typeout{Note that this tries to fulfill the QUT Thesis requirements but it is unofficial}
+\typeout{Developed by Yu-Chu Tian, Computer Science, QUT}
+
+% First thing we do is to make sure that documentclass "report" has been loaded. 
+% A common error is to try to use usydthesis as a documentstyle rather than a package.
+\@ifundefined{chapter}{\@latexerr{The `qutthesis' option should be used
+as a package with the document class `report'}{You may want to read the
+qutthesis documentation.}}{}
+
+
+%%%%%
+%%%%%   DOCUMENTATION
+%%%%%
+
+\long\def\comment#1{}
+\comment{       %BEGIN of a lond comment
+
+    Example of use:
+
+    \documentclass{report}
+    \usepackage{qutthesis}
+    \department{Faculty of Science and Technology}
+
+    \begin{document}
+    
+    \title{Sample PhD Thesis\\
+            With Examples}
+    \author{A B Candidate}
+        \principaladviser{John Smith}
+        \firstreader{Mike Green}
+        \secondreader{Ray White\\(Another Department)}
+        \thirdreader{June Hu} %if needed
+ 
+        \beforepreface
+        \prefacesection{Preface}
+        This is a preface of the thesis. It tells you what you need to know about the use of this usyd package in conjunction with the document class `report" in LaTex2e. More information ...
+        \prefacesection{Acknowledgments}
+        I would like to express my thanks to ...
+        \afterpreface
+ 
+        \chapter{Introduction}
+         This is an introductory chapter of the thesis. Please describe in this chapter the background, objectives, and many other aspects of the thesis. More descriptions ...
+        \chapter{Conclusions}
+         This chapter concludes the thesis with remarks, discussions, recommendations, and many more ...
+        
+    \appendix
+        \chapter{A Long Proof}
+         This appendix consists of some detailed results that are inappropriate to be embedded in the body text. More descriptions ...
+        \bibliographystyle{plain}
+        \bibliography{mybib}
+        
+    \end{document}
+
+Documentation: 
+    This style file follows the Graduate Degree Support Section of 
+    the Registrar's Office's "Directions for Preparing Doctoral 
+    Dissertations".  It sets the margins and interline spacing and 
+    disallows page breaks at hyphens.
+
+    The \beforepreface command creates the title page, a copyright page
+    (optionally), and a signature page.  Then the user should put
+    preface section(s), using the \prefacesection{section title}
+    command.  The \afterpreface command then produces the tables of
+    contents, tables and figures, and sets things up to start
+    the main body (on arabic page 1).
+    
+    The following commands can control what goes in the front matter
+    material:
+    
+        \title{thesis title}
+        \author{author's name}
+        \department{author's department or school} 
+                - School of Electrical and Information Engineering, if omitted
+    The following switches allow for special title pages
+        \committeethesis - for a thesis in a committee (no department)
+                           use \department{committee name}
+        \programthesis - for a thesis in a program (no department)
+                           use \department{program name}
+        \educationthesis - for the School of Education. \department doesn't matter
+        \businessthesis - for the GraduateSchool of Business. \department doesn't matter
+        \lawthesis - for the School of law. \department doesn't matter
+        \humanitiesthesis - for a thesis also submitted to the Graduate
+                            Program in Humanities
+        \specialthesis  - for a Graduate Special thesis
+        \industrialthesis - for a thesis in Industrial Engineering
+        \dualthesis     - for a thesis in a dual language department.
+                          Also define \language{language}.
+
+        \principaladviser{the principal advisor's name}
+           (or \principaladvisor, if you prefer advisor spelled with o)
+        \coprincipaladviser{optional second principal advisor's name}
+           (or \coprincipaladvisor, use only if you have two principal
+           advisors only for the second one)
+        \firstreader{the first reader's name}
+        \secondreader{the second reader's name}
+        \thirdreader{optional third reader's name}
+        \submissiondate{month year in which submitted to GPO}
+                - date LaTeX'd if omitted
+        \copyrightyear{year degree conferred (next year if submitted
+          in Fall quarter)}
+                - year LaTeX'd (or next year, in December) if omitted
+        \copyrighttrue or \copyrightfalse
+                - produce or don't produce a copyright page (true by default)
+        \thesiscopyrighttrue or \thesiscopyrightfalse
+                - produces the style of copyright page listed by the
+                Thesis Office or the style that everyone else uses
+                (Thesis office by default).
+        \figurespagetrue or \figurespagefalse
+                - produce or don't produce a List of Figures page
+                  (true by default)
+        \tablespagetrue or \tablespagefalse
+                - produce or don't produce a List of Tables page
+                  (true by default)
+
+    This style uses interline spacing that is 1.5 times normal, except
+    in the figure and table environments where normal spacing is used.
+    That can be changed by doing:
+        \renewcommand{\baselinestretch}{1.8}
+    (or whatever you want instead of 1.8)
+    Unfortunately, that command probably won't take effect unless it comes
+    before the \begin{document} or is followed by something like \small
+    \normalsize. 
+
+    You can also set any particular section in singlespacing mode by using
+    the singlespace environment.  For example
+
+    \begin{quote}
+    \begin{singlespace}
+    ...
+    \end{singlespace}
+    \end{quote}
+
+    makes the quote singlespaced.
+
+    The example at the beginning shows the 12pt substyle being used.  This
+    seems to give acceptable looking results, but it may be omitted to get
+    smaller print.
+}  % End of comments
+
+%%%%%
+%%%%%   SETUP SPACING
+%%%%%
+\RequirePackage{setspace}
+
+% Use 1.5 times the normal baseline-to-baseline skip
+\setstretch{1.5}
+
+% Linespacing for tables
+\renewcommand{\arraystretch}{1.5} 
+
+%%%%%
+%%%%%   SETUP Verbatim
+%%%%%
+%\usepackage{verbatim}
+
+%%%%
+%%%%    SETUP TIMES FONT THROUGHOUT (added on 25 September 2002)
+%%%%
+\usepackage{times}
+
+%%%%%
+%%%%% PRE_LOAD graphicx PACKAGES
+%%%%%
+\usepackage{graphicx}
+
+%%%%%
+%%%%%   SETUP MARGINS AND PENALTIES NEEDED FOR STANFORD THESIS
+%%%%%
+
+% We use 3cm (1.18") margins on both left and right side (so, extra 0.18in). 
+% Theses may be either single or double sided
+% ====Glen Tian in April 2008
+% Margins changed to 2.5cm on both sides
+  \if@twoside
+     \setlength\oddsidemargin   {0in} %{+0.76cm} %{+0.46cm} %{0.18in} %{36.1\p@}
+     \setlength\evensidemargin  {0in} %{-0.84cm} %{-0.54cm} %{0.18in} %{0\p@}
+     \setlength\marginparwidth  {40\p@}
+  \else
+     \setlength\oddsidemargin   {0in} %{0.18in}%{36.1\p@}
+     \setlength\evensidemargin  {0in} %{0.18in}%{36.1\p@}
+     \setlength\marginparwidth  {40\p@}
+  \fi
+
+\marginparsep 10pt
+%\oddsidemargin 0.5in \evensidemargin 0in
+%\marginparwidth 40pt 
+
+%\topmargin 0pt \headsep .5in
+%\textheight 8.1in \textwidth 6in
+\setlength{\topmargin}{-1cm} %{0pt}
+\setlength{\headsep}{1cm}
+\setlength{\textheight}{24.7cm} %{23cm}
+\setlength{\textwidth}{16.0cm} %{15.0cm} %A4paper 21cm-6cm
+
+%\setlength{\headheight}{14.5pt} %fancy headers requires at least 14.4999pt for \headheight
+
+% Disallow page breaks at hyphens (this will give some underfull vbox's,
+% so an alternative is to use \brokenpenalty=100 and manually search
+% for and fix such page breaks)
+\brokenpenalty=10000
+
+%%%Hyphen penalty to control hyphenation
+\hyphenpenalty=9900
+
+% Set Up \parskip
+\parskip = 0.3\baselineskip
+
+%%%%%
+%%%%%   SETUP COMMANDS PECULIAR TO THESES
+%%%%%
+
+% \author, \title are defined in report; here are the rest of the
+% front matter defining macros
+\def\authoremail#1{\gdef\@authoremail{#1}}
+\def\lab#1{\gdef\@lab{#1}} 
+\def\department#1{\gdef\@department{#1}}
+\def\school#1{\gdef\@school{#1}} 
+\def\faculty#1{\gdef\@faculty{#1}}
+\def\university#1{\gdef\@university{#1}}
+\newif\ifuniversitylogo
+\universitylogofalse
+\usepackage{ifthen}
+\def\universitylogo#1#2#3{%
+	\ifthenelse{\equal{#1}{yes} \or \equal{#1}{true} \or \equal{#1}{1} \or%
+			 \equal{#1}{YES} \or \equal{#1}{TRUE} \or %
+			 \equal{#1}{Yes} \or \equal{#1}{True} \or %
+			 \equal{#1}{Y}   \or \equal{#1}{T} \or %
+			 \equal{#1}{y}   \or \equal{#1}{t}} {%
+		\universitylogotrue
+		\gdef\@logoscale{#2}
+		\gdef\@logofile{#3}
+	} {%
+		\universitylogofalse
+	}
+}
+\def\supervisor#1{\gdef\@supervisor{#1}}
+\def\advis@r{Adviser} % default spelling
+\def\principalsupervisor#1{\gdef\@principalsupervisor{#1}}
+\def\principalsupervisor#1{\gdef\@principalsupervisor{#1}\gdef\advis@r{Supervisor}}
+\def\coprincipaladvisor#1{\gdef\@coprincipaladviser{#1}\gdef\advis@r{Co-Supervisor}}
+\def\coprincipaladviser#1{\gdef\@coprincipaladviser{#1}\gdef\advis@r{Co-Supervisor}}
+\def\firstreader#1{\gdef\@firstreader{#1}}
+\def\secondreader#1{\gdef\@secondreader{#1}}
+\def\thirdreader#1{\gdef\@thirdreader{#1}}
+\def\thesistype#1{\gdef\@thesistype{#1}}
+\def\submissiondate#1{\gdef\@submissiondate{#1}}
+\def\copyrightyear#1{\gdef\@copyrightyear{#1}} % \author, \title in report
+\def\informationcutoffdate#1{\gdef\@informationcutoffdate{#1}} 
+
+
+% needed only for dual language departments
+\def\language#1{\gdef\@language{#1}} \def\@language{babel}
+\def\@title{}
+\def\@author{}
+\def\@authoremail{}
+\def\@supervisor{}
+\def\@university{Queensland University of Technology}
+\def\@department{Faculty of Science and Technology}
+\def\@lab{Computer Science}
+\def\@faculty{Science and Engineering Faculty}
+\def\@school{School of Electrical Engineering and Computer Science}
+\def\@thesistype{Doctor of Philosophy}
+\def\@principalsupervisor{}
+\def\
+\def\@logoscale{1.0}
+\def\@logofile{QUTLogo.eps}
+\def\@firstreader{*}
+\def\@secondreader{*}
+\def\@coprincipaladviser{*}
+\def\@thirdreader{*}
+\def\@informationcutoffdate{}
+\def\@submissiondate{\ifcase\the\month\or
+  January\or February\or March\or April\or May\or June\or
+  July\or August\or September\or October\or November\or December\fi
+  \space \number\the\year}
+% Stanford says that Fall quarter theses should have the next year as the
+% copyright year
+
+\ifnum\month>8
+    \@tempcnta=\year \advance\@tempcnta by 1
+    \edef\@copyrightyear{\number\the\@tempcnta}
+\else
+    \def\@copyrightyear{\number\the\year}
+\fi
+\newif\ifcopyright 
+\newif\iffigurespage 
+\newif\iftablespage
+\newif\ifthesiscopyright
+\copyrighttrue 
+\figurespagetrue 
+\tablespagetrue
+\thesiscopyrighttrue
+
+\newif\iforinality
+\orinalitytrue
+
+\def\@standardsub{\lowercase
+\expandafter{\@faculty}}
+\def\@standardend{}
+
+\def\committeethesis{\let\@whichsub=\@committeesub}
+\def\programthesis{\let\@whichsub=\@programsub}
+\def\educationthesis{\let\@whichsub=\@educationsub}
+\def\businessthesis{\let\@whichsub=\@businesssub}
+\def\lawthesis{\let\@whichsub=\@lawsub}
+\def\humanitiesthesis{\let\@whichsub=\@humanitiessub%
+\let\@whichend=\@humanitiesend}
+\def\specialthesis{\let\@whichsub=\@specialsub%
+\let\@whichend=\@specialend}
+\def\industrialthesis{\let\@whichsub=\@industrialsub%
+\let\@whichend=\@industrialend}
+\def\dualthesis{\let\@whichsub=\@dualsub%
+\let\@whichend=\@dualend}
+
+\def\@committeesub{submitted to the Committee on \lowercase\expandafter{\@department}\\
+                and the committee on graduate studies}
+\def\@programsub{submitted to the Program in \lowercase\expandafter{\@department}\\
+                and the committee on graduate studies}
+\def\@educationsub{submitted to the school of education\\
+                and the committee on graduate studies}
+\def\@businesssub{submitted to the graduate school of business\\ and the
+  committee on graduate studies}
+\def\@lawsub{submitted to the school of law\\
+                and the committee on graduate studies}
+
+\def\@humantiessub{submitted to the \lowercase\expandafter{\@department},\\
+                the graduate program in humanities,\\
+                and the committee on graduate studies}
+\def\@humantiesend{\\in\\ \lowercase\expandafter{\@department} and humanities}
+
+\def\@specialsub{submitted to the Committee on Graduate Studies}
+\def\@specialend{\\in\\ \lowercase\expandafter{\@department}}
+
+\def\@industrialsub{submitted to the\\ department of industrial
+engineering and engineering management\\ and the committee on graduate studies}
+\def\@industrialend{\\in\\ industrial engineering}
+
+\def\@dualsub{submitted to the department of \lowercase\expandafter{\@department}\\
+and the committee on graduate studies}
+\def\@dualend{\\in\\ \lowercase\expandafter{\@language}}
+
+\let\@whichend=\@standardend
+\let\@whichsub=\@standardsub
+
+\newif\iflab
+\labtrue
+\newif\ifschool
+\schooltrue
+
+\newcommand\blankpage{
+	\thispagestyle{empty}
+	\vspace{10cm}~~~~
+	\newpage\clearpage
+}
+
+\renewcommand{\maketitle}{%
+    \thispagestyle{empty} %title page
+   \null	%\vskip0.5in
+
+        \begin{center}
+            {\Large\expandafter{\bf\@title}}
+		\bigskip\bigskip
+
+            \sc a thesis submitted to\\
+			 the \@whichsub\\
+			of \@university \\
+                in fulfilment of the requirements 
+			for the degree of \\
+                \@thesistype \lowercase\expandafter{\@whichend}
+        \end{center}
+	    \vfill
+    
+     \ifuniversitylogo
+	\begin{figure}[h]
+		\begin{center}
+		\includegraphics[scale=\@logoscale]{\@logofile}
+		\end{center}
+	\end{figure}
+	\fi
+
+		\vfill
+        \begin{center}
+                {\Large\rm\bf\@author}\\
+            \bigskip
+	    	\ifschool{\@school}\\
+		\fi
+%            \@school\\
+						\@faculty\\ %@whichsub\\
+		  \@university\\
+		\bigskip
+                \@submissiondate\\
+
+        \end{center}
+    	\newpage\clearpage
+	\blankpage
+	\pagenumbering{arabic}
+      \pagestyle{plain}
+	
+}
+
+\newcommand{\insidetitlepage}{
+\thispagestyle{empty}
+        \begin{center}
+        {\Large\expandafter{\bf\@title}}\par
+%       \end{center}
+                \bigskip\bigskip
+%         \begin{center}
+%                \copyright\ Copyright \@copyrightyear\ by \@author \\
+%               \@author \\
+{\sc A thesis submitted to\\
+			 the \@whichsub\\
+			of \@university \\
+                in fulfilment of the requirements 
+			for the Degree of \\
+                \@thesistype \lowercase\expandafter{\@whichend}
+}
+%	  		Supervisor: \@supervisor
+			
+%               All Rights Reserved
+ \vfill
+	\ifuniversitylogo
+	\begin{figure}[h]
+		\begin{center}
+		\includegraphics[scale=\@logoscale]{\@logofile}
+		\end{center}
+	\end{figure}
+	\fi
+
+        \end{center}
+	\vfill
+\begin{center}
+                {\Large\rm\bf\@author}\\
+            \smallskip
+           {\rm\bf Supervisor: \@supervisor}\\
+		\bigskip
+	    	\ifschool{\@school}\\
+		\fi
+            \@faculty\\ %@whichsub\\
+		 \@university\\
+		\bigskip
+                \@submissiondate\\
+\end{center}
+
+\newpage\clearpage
+\thispagestyle{plain}
+%\vspace{10cm}~~~~
+%\newpage\clearpage
+%\blankpage
+\cleardoublepage
+}
+
+\def\originality{
+%	\subsubsection*{Author's Statement of Originality} 
+\subsubsection*{Statement of Original Authorship} %Changed for QUT, by Glen Tian on 25 Nov 2010
+{%\setstretch{1.2}
+{%\small	
+The work contained in this thesis has not been previously submitted to meet requirements for an award at this or any other higher education institution. To the best of my knowledge and belief, the thesis contains no material previously published or written by another person except where due reference is made.
+}}}
+
+\def\copyrightdeclare{
+	\subsubsection*{Copyright in Relation to This Thesis}
+%\begin{comment}
+%{%\setstretch{1.2}
+%{\small	Under Section 35 of the Copyright Act 1968, the author of this thesis is the owner of any copyright %	subsisting in the work, even though it is unpublished.
+%
+%	Under section 31(I)(a)(i), copyright includes the exclusive right to 'reproduce the work in a material 
+%	form'. 	Thus, copyright is infringed by a person who, not being the owner of the copyright, reproduces 
+% or authorises 	the 	reproduction of the work, or of more than a reasonable part of the work, in a material 
+% form, unless the reproduction is a 'fair dealing' with the work 'for the purpose of research or study' as 
+% further defined in Sections 40 and 41 of the Act. 
+%
+%
+%	This thesis must therefore be copied or used only under the normal conditions of scholarly fair dealing 
+% for the purposes of research, criticism or review, as outlined in the provisions of the Copyright Act 1968. 
+% In particular, no results or conclusions should be extracted from it, nor should it be copied or closely 
+% paraphrased in 	whole or in part without the written consent of the author. Proper written 
+% acknowledgement should be made for any assistance obtained from this thesis.
+%
+%	Copies of the thesis may be made by a library on behalf of another person provided the officer in charge 
+% of the library is satisfied that the copy is being made for the purposes of research or study.
+%}}
+%\end{comment}
+\copyright\ Copyright \@copyrightyear\ by \@author.  All rights reserved.\\
+}
+
+\def\thesiscopyrightpage{%
+%        \null%\vfill
+\vspace*{0.5\textheight}
+	\copyrightdeclare
+	
+	\vfill
+	\iforinality\originality\fi\par
+	\vfill
+	\noindent\textbf{Signature:}\par
+	\bigskip
+	\noindent\textbf{Date:}
+%\newpage\clearpage
+%\vspace{10cm}~~~~
+%\newpage\clearpage
+\cleardoublepage
+}
+
+\def\thesiscopyrightpageWithTitle{%
+%        \null%\vfill
+%\thispagestyle{empty}
+{\noindent{\Large\expandafter{\bf\@title}}\\[3\baselineskip]
+{\large\rm\bf\@author}~~(Email: \@authoremail)\\
+%\ifauthoremail
+%	{Email: \@authoremail\\ [3.0ex]}
+%\fi
+{\rm\bf Supervisor: \@supervisor}\\[3.0ex]
+\ifschool{\@school}\\
+\fi
+\@faculty\\ %@whichsub\\}
+\@university}
+
+  \vfill
+
+	\copyrightdeclare
+	
+	\vfill
+	\iforinality\originality\fi\par
+	\vfill
+	\noindent\textbf{Signature:}\par
+	\bigskip
+	\noindent\textbf{Date:}
+%\newpage\clearpage
+%\vspace{10cm}~~~~
+%\newpage\clearpage
+\cleardoublepage
+}
+
+
+\def\tradcopyrightpage{%
+%        \null%\vfill
+        \begin{center}
+            {\Large\expandafter{\bf\@title}}
+            \bigskip
+
+		\copyright\ Copyright \@copyrightyear\ by \@author
+%                All Rights Reserved
+
+	\ifuniversitylogo
+	\begin{figure}[h]
+		\begin{center}
+		\includegraphics[scale=\@logoscale]{\@logofile}
+		\end{center}
+	\end{figure}
+	\fi
+
+        \end{center}
+	\vfill
+	\iforinality\orinality\fi
+	\bigskip\bigskip	
+	\copyrightdeclare
+}
+
+\def\copyrightpage{%
+%	\thispagestyle{empty}
+	\ifcopyright
+		\ifthesiscopyright
+			\thesiscopyrightpage
+		\else
+			\tradcopyrightpage
+		\fi
+	\fi
+	\newpage
+}
+
+\def\copyrightpageWithTitle{%
+%	\thispagestyle{empty}
+	\ifcopyright
+		\ifthesiscopyright
+			\thesiscopyrightpageWithTitle
+		\else
+			\tradcopyrightpage
+		\fi
+	\fi
+	\newpage
+}
+
+\long\def\signature#1{%
+\begin{center}
+\begin{minipage}{\textwidth}
+\parindent=0pt
+I certify that I have read this thesis and that, in my opinion,
+it is fully adequate in scope and quality as a thesis for the degree
+of \@thesistype.
+\par
+\vspace{.5in}
+\hbox to \textwidth{\hfil\shortstack{\vrule width 3in height 0.4pt\\#1}}
+\end{minipage}
+\end{center}}
+
+\def\signaturepage{%
+%	\thispagestyle{empty}
+        \clearpage
+	  \signature{\@principalsupervisor\\(Principal Supervisor)}
+        \vfill
+% if second principal advisor
+        \if*\@coprincipaladviser \else
+        \signature{\@coprincipalsupervisor\\(Principal Supervisor)}
+        \vfill\fi
+        \if*\@firstreader \else 
+        \signature\@firstreader
+        \vfill\fi
+        \if*\@secondreader \else 
+        \signature\@secondreader
+        \vfill\fi
+% if thirdreader then do \signature\@thirdreader \vfill
+        \if*\@thirdreader \else 
+        \signature\@thirdreader
+        \vfill\fi
+        \begin{center}
+        \begin{minipage}{15cm}
+        Approved for the University Committee on Graduate Studies:\par
+        \vspace{.5in}
+        \hbox to 15cm{\hfil\shortstack{\vrule width 3in height 0.4pt}}
+        \end{minipage}
+	  \end{center}
+	  \newpage}
+
+\comment{
+\def\beforepreface{
+        \pagenumbering{roman}
+        \pagestyle{plain}
+        \titlepage
+        \ifcopyright\ifthesiscopyright\thesiscopyrightpage\else\tradcopyrightpage\fi\fi
+        \signaturepage
+	}
+}
+
+\def\prefacesection#1{%
+        \chapter*{#1}
+        \addcontentsline{toc}{chapter}{#1}}
+
+\comment{
+\RequirePackage{fancyhdr}
+\def\appendixsection[#1]#2{%
+	\chapter*{#2}
+	\addcontentsline{toc}{chapter}{#2}
+	\pagestyle{fancy}
+	\fancyhead[RE,LO]{\normalsize\textit{\uppercase{#1}}}
+	\fancyhead[LE,RO]{\normalsize \thepage}
+	\fancyfoot{}
+	\renewcommand{\headrulewidth}{0pt}}
+}
+
+\newif\iflistnomenclatureatfront
+\listnomenclatureatfrontfalse
+\def\listnomenclatureatfront#1#2{% 
+	\ifthenelse{\equal{#1}{yes} \or \equal{#1}{true} \or \equal{#1}{1} \or%
+			 \equal{#1}{YES} \or \equal{#1}{TRUE} \or %
+			 \equal{#1}{Yes} \or \equal{#1}{True} \or %
+			 \equal{#1}{Y}   \or \equal{#1}{T} \or %
+			 \equal{#1}{y}   \or \equal{#1}{t}} {%
+		\listnomenclatureatfronttrue
+		\gdef\@nomenclaturefile{#2}
+	} {%
+		\listnomenclatureatfrontfalse
+	}
+}
+
+\def\afterpreface{\newpage
+				{\setlength{\parskip}{0.2\baselineskip}
+				\tableofcontents
+	   \iflistnomenclatureatfront
+		   \listnomenclature
+	   \fi
+	   \iffigurespage
+                \listoffigures
+                \addcontentsline{toc}{chapter}{\listfigurename}
+        \fi
+        \iftablespage
+                \listoftables
+                \addcontentsline{toc}{chapter}{\listtablename}
+        \fi
+%	   \ifabbreviationspage
+%			\listofabbreviations
+%	   \fi
+        }
+        \cleardoublepage
+        \pagenumbering{arabic}
+        \pagestyle{fancy} %{headings}
+}
+
+%%%%%%%%%%%%%%Heading Style
+\RequirePackage{fancyhdr}
+\if@twoside
+  %%% twoside options %%%
+  \fancyhf{}
+  \fancyhead[le,ro]{\thepage}
+  \fancyhead[re]{\itshape\leftmark}
+  \fancyhead[lo]{\itshape\rightmark}
+\else
+  %%% oneside - only for submission to external examiners
+  \fancyhf{}
+  \fancyhead[l]{\itshape\leftmark}
+  \fancyhead[c]{}
+  \fancyhead[r]{\itshape\thepage}
+\fi
+\renewcommand{\headrulewidth}{0.4pt}
+
+
+\def\listnomenclaturename{Nomenclature}
+\def\listnomenclature{%
+	\chapter*{Nomenclature}
+	\addcontentsline{toc}{chapter}{\listnomenclaturename}
+	\input{\@nomenclaturefile}   
+}
+
+% Redefine \thebibliography to go to a new page and put an entry in the
+% table of contents
+\renewcommand{\bibname}{Literature Cited}
+\let\@ldthebibliography\thebibliography
+\renewenvironment{thebibliography}[1]{%
+	\if@openright\cleardoublepage\else\clearpage\fi	
+	\addcontentsline{toc}{chapter}{\bibname}
+	\@ldthebibliography[1]}
+
+
+%%%
+%%% Table of Contents, List of Figures, List of Tables
+%%%
+%\renewcommand{\@pnumwidth}{2em} %width of the page number on right hand side
+%\renewcommand{\@tocrmarg}{4em}  % right margin that the text ends 
+
+%%%
+%%% NEW DEDICATION, RENEW ABSTRACT, NEW KEYWORDS, NEW ACK, NEW PREFACE, NEW NOMENCLATURE
+%%%
+\newenvironment{dedication}{\it\Large\vspace*{0.2\textheight}\begin{center}}{\end{center}\newpage\clearpage}
+\renewenvironment{abstract}{\prefacesection{Abstract}}{}  %Executive Summary
+\newenvironment{keywords}{\prefacesection{Keywords}}{} %Keywords of thesis
+\newenvironment{ack}{\prefacesection{Acknowledgments}}{}
+\newenvironment{acknowledgment}{\prefacesection{Acknowledgments}}{}
+\newenvironment{preface}{\prefacesection{Preface}}{}
+\renewcommand{\contentsname}{Table of Contents}
+
+%%%%
+%%%% RENEW CHAPTER
+%%%%
+\renewcommand\chapter{\if@openright\cleardoublepage\else\clearpage\fi
+                    \thispagestyle{plain}%
+                    \global\@topnum\z@
+                    \@afterindentfalse
+                    \secdef\@chapter\@schapter}
+\def\@chapter[#1]#2{\ifnum \c@secnumdepth >\m@ne
+                         \refstepcounter{chapter}%
+                         \typeout{\@chapapp\space\thechapter.}%
+                         \addcontentsline{toc}{chapter}%
+                                   {\protect\numberline{\thechapter}#2}% chenged from {#1}: Full headings in TOC
+                    \else
+                      \addcontentsline{toc}{chapter}{#2}%  changed from {#1}: Full headings in TOC
+                    \fi
+                    \chaptermark{#1}%	{#1}  running title on top of each page
+                    \addtocontents{lof}{\protect\addvspace{10\p@}}%
+                    \addtocontents{lot}{\protect\addvspace{10\p@}}%
+                    \if@twocolumn
+                      \@topnewpage[\@makechapterhead{#2}]%
+                    \else
+                      \@makechapterhead{#2}%
+                      \@afterheading
+                    \fi
+}
+\def\@makechapterhead#1{%
+  \vspace*{30\p@}       %changed from 50 to 30
+  {\parindent \z@ \raggedright \normalfont
+    \ifnum \c@secnumdepth >\m@ne
+        \LARGE\bfseries \@chapapp\space \thechapter     %changed from Huge to LARGE
+        \par\nobreak
+        \vskip 20\p@   %changed from 20 to 10
+    \fi
+    \interlinepenalty\@M
+    \LARGE \bfseries #1\par\nobreak                     %Changed from huge
+    \hrulefill      %This line is added on 25 Sept 2002
+    \vskip 20\p@        %changed from 40 to 20
+  }
+}
+\def\@schapter#1{\if@twocolumn
+                   \@topnewpage[\@makeschapterhead{#1}]%
+                 \else
+                   \@makeschapterhead{#1}%
+                   \@afterheading
+                 \fi}
+\def\@makeschapterhead#1{%
+  \vspace*{30\p@}       %changed from 50 to 30
+  {\parindent \z@ \raggedright
+    \normalfont
+    \interlinepenalty\@M
+    \LARGE \bfseries  #1\par\nobreak    %changed from Huge to LARGE
+    \hrulefill                          %This line is added on 25 Sept 2002
+    \vskip 20\p@                    %changed from 40 to 20
+  }}
+
+%%%%
+%%%% RENEW SECTION, SUBSECTION, AND SUBSUBSECTION
+%%%%
+\renewcommand\section{\@startsection {section}{1}{\z@}%
+                                   {-3.5ex \@plus -1ex \@minus -.2ex}%
+                                   {2.3ex \@plus.2ex}%
+                                   {\normalfont\large\bfseries}} 
+                                %changed from Large to large
+\renewcommand\subsection{\@startsection{subsection}{2}{\z@}%
+                                     {-3.25ex\@plus -1ex \@minus -.2ex}%
+                                     {1.5ex \@plus .2ex}%
+                                     {\normalfont\normalsize\bfseries}} 
+                                %changed from large to normalsize
+\renewcommand\subsubsection{\@startsection{subsubsection}{3}{\z@}%
+                                     {-3.25ex\@plus -1ex \@minus -.2ex}%
+                                     {1.5ex \@plus .2ex}%
+                                     {\normalfont\normalsize\bfseries}}
+                                %didn't change
+
+%%%%
+%%%% DEFINE APPENDIX
+%%%%
+\newcounter{appendix}
+\def\theappendix{\Alph{appendix}}
+\def\@appendix[#1]#2{%
+  \renewcommand{\chaptername}{Appendix}
+  \refstepcounter{appendix}
+  \renewcommand{\thechapter}{\theappendix}
+  \chapter[#1]{#2}
+}
+\def\appendix[#1]#2{\@appendix[#1]{#2}}
+
+%%%
+%%%-----------renew environments table and table* --------------
+%%%
+\renewcommand{\fnum@table}{\textbf{\centering\tablename~\thetable}}
+
+\renewenvironment{table}
+{
+ \renewcommand{\arraystretch}{1.2}  
+ %\vspace{0.5\baselineskip plus 0.2\baselineskip minus 0.2\baselineskip}%
+ \setlength\abovecaptionskip{0.02\baselineskip plus 0\baselineskip minus 0.02\baselineskip}%
+ \setlength\belowcaptionskip{0.5\baselineskip plus 0.2\baselineskip minus 0.2\baselineskip}%
+ \@float{table}
+}
+{%\vspace{-0.5\baselineskip plus 0.2\baselineskip minus 0.2\baselineskip}%
+ \end@float%
+% \setlength\abovecaptionskip{0.5\baselineskip plus 0.2\baselineskip minus 0.2\baselineskip}%
+% \setlength\belowcaptionskip{0.02\baselineskip plus 0\baselineskip minus 0.02\baselineskip}%
+}
+
+\renewenvironment{table*}
+{
+ \renewcommand{\arraystretch}{1.2} 
+ %\vspace{0.5\baselineskip plus 0.2\baselineskip minus 0.2\baselineskip}%
+ \setlength\abovecaptionskip{0.02\baselineskip plus 0\baselineskip minus 0.02\baselineskip}%
+ \setlength\belowcaptionskip{0.5\baselineskip plus 0.2\baselineskip minus 0.2\baselineskip}%
+ \@dblfloat{table*}
+}
+{%\vspace{-0.5\baselineskip plus 0.2\baselineskip minus 0.2\baselineskip}%
+ \end@dblfloat%
+% \setlength\abovecaptionskip{0.5\baselineskip plus 0.2\baselineskip minus 0.2\baselineskip}%
+% \setlength\belowcaptionskip{0.02\baselineskip plus 0\baselineskip minus 0.02\baselineskip}%
+}
+
+%%%
+%%%-----------renew environments figure and figure* --------------
+%%%
+\renewcommand{\fnum@figure}{\textbf{\centering\figurename~\thefigure}}
+
+\comment{
+\renewenvironment{figure}
+{%\vspace{0.4\baselineskip plus 0.2\baselineskip minus 0.2\baselineskip}%
+ \setlength\abovecaptionskip{0.5\baselineskip plus 0.2\baselineskip minus 0.2\baselineskip}%
+ \setlength\belowcaptionskip{0.02\baselineskip plus 0\baselineskip minus 0.02\baselineskip}%
+ \@float{figure}
+}
+{%\vspace{-0.5\baselineskip plus 0.3\baselineskip minus 0.2\baselineskip}%
+ \end@float%
+% \setlength\abovecaptionskip{0.02\baselineskip plus 0\baselineskip minus 0.02\baselineskip}%
+% \setlength\belowcaptionskip{0.5\baselineskip plus 0.2\baselineskip minus 0.2\baselineskip}%
+}
+
+\renewenvironment{figure*}
+{%\vspace{0.4\baselineskip plus 0.2\baselineskip minus 0.2\baselineskip}%
+ \setlength\abovecaptionskip{0.5\baselineskip plus 0.2\baselineskip minus 0.2\baselineskip}%
+ \setlength\belowcaptionskip{0.02\baselineskip plus 0\baselineskip minus 0.02\baselineskip}%
+ \@float{figure*}
+}
+{%\vspace{-0.5\baselineskip plus 0.3\baselineskip minus 0.2\baselineskip}%
+ \end@float%
+% \setlength\abovecaptionskip{0.02\baselineskip plus 0\baselineskip minus 0.02\baselineskip}%
+% \setlength\belowcaptionskip{0.5\baselineskip plus 0.2\baselineskip minus 0.2\baselineskip}%
+}
+}
+
+%%%%
+%%%% NEW PROGRAM
+%%%%
+\newenvironment{program}{\small\bigskip\par\hangindent\parindent\ttfamily}
+                        {\par\hangindent\parindent\bigskip\normalsize}
+
+%%%%%
+%%%%% SETUP REMARK ENVIRONMENT
+%%%%%
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{remark}{Remark}
+\newtheorem{corollary}{Corollary}
+
+%%%%%
+%%%%% Environment for proof
+%%%%%
+\providecommand{\qed}{\hfill \mbox{\raggedright \rule{.07in}{.1in}}}
+\newenvironment{proof}{\vspace{0ex}\noindent{\bf Proof}\hspace{0.5em}}
+	{\hfill\qed\vspace{0ex}}
+
+%%%%%
+%%%%% SETUP MYABSTRACT AND MYKEYWORDS ENVIRONMENTS FOR USE IN EACH CHAPTER
+%%%%%
+\newenvironment{ChapterAbstract}{\begin{center}\par\hangindent\parindent\begin{minipage}{0.9\textwidth}\textbf{Abstract: }}
+					{\end{minipage}\par\hangindent\parindent\smallskip\end{center}}
+\newenvironment{ChapterKeywords}{\begin{center}\smallskip\par\hangindent\parindent\begin{minipage}{0.9\textwidth}\textbf{Keywords: }}
+					{\end{minipage}\par\hangindent\parindent\end{center}}
+					
+% Start out normal
+\pagestyle{headings}

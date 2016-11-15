@@ -2,6 +2,7 @@
 \usepackage[titletoc,toc,title]{appendix}
 \usepackage{color}
 \usepackage{colortbl}
+\usepackage{qutthesis}
 \usepackage{graphicx}
 \usepackage{algpseudocode}
 \usepackage{graphicx}
@@ -30,20 +31,30 @@
 \newcommand\todo[1]{\textcolor{red}{#1}}
 
 \begin{document}
-\title{\small Thesis\\\huge Investigating Methods Of Annotating Lifelogs For Use In Search}
+\title{Investigating Methods Of Annotating Lifelogs For Use In Search}
 
-\author{Harry Scells\\harrisen.scells@connect.qut.edu.au\\\\\small Supervisor - Guido Zuccon\\\small g.zuccon@qut.edu.au\\}
-\maketitle
-
-\chapter*{Abstract}
-The notion of `quantified self' in recent years is allowing people to more easily capture data about themselves. Lifelogging is an umbrella term which encompasses multiple personalised data gathering forms which primarily involve wearing a device that continuously records images of every day events via one minute snapshots. These data capturing processes create vast amounts of personalised data about the user, however there is a lack of effective ways to search this data that can accurately retrieve moments of significance that a user may be interested in. The primary form of lifelogging is through the capture of images from wearable cameras. While image search has been the subject of extended research in the past and great advances have been made in both text-based image retrieval and content-based image retrieval only limited work has considered searching lifelog image data, and the solutions currently available have not demonstrated effective performance. In this thesis four annotation methodologies are investigated to discover their performance in a text-based image retrieval system. These methodologies include textual descriptions of the images, tags, weighted tags, and queries. Annotations are investigated to understand which methodology is the best to enable effective text-based image retrieval on lifelog data and then automatic image captioning is investigated to determine if textual annotations can automatically be derived. Finally, each methodology is compared in terms of the cost to manually and automatically collect annotations.
-
-The results of this research indicate that under ideal conditions, annotations which represent a query are the most effective in a retrieval task. This is compounded by the fact that on average they are the most cost effective annotation to collect of the four under investigation. The query annotation represents the text a user may enter into a typical search engine to retrieve an image they are looking for.
-
-\chapter*{Acknowledgements}
+\author{Harrisen Scells}
+\authoremail{harrisen.scells@connect.qut.edu.au}
+\supervisor{Guido Zuccon}
+\university{Queensland University of Technology}
+\thesistype{Honours in Information Technology} 
+\submissiondate{November 2016}
+\insidetitlepage
+\setcounter{page}{1}
+\begin{dedication}
 Thank you to my friends and family for the massive amount of support and encouragement over the past year -- I could not have done this without it!
 
 Most importantly I would like to thank my amazing supervisor Guido for the incredible opportunities and support he has provided me with -- and for motivating me to pursue honours in the first place. It has been a challenging but amazing year of learning, and I am very grateful.
+\end{dedication}
+
+\begin{abstract}
+The recent technological advances in and widespread marketing of quantified self devices is allowing more and more people to capture data about themselves. Lifelogging is an umbrella term which encompasses many personalised data gathering forms which primarily involve wearing a device that continuously captures images of every day events. These data capturing processes create vast amounts of personalised data about the user, however there is a lack of effective search methods that can accurately retrieve moments of interest for a user. The primary form of lifelogging is through the capture of images from wearable cameras. While image search has been the subject of extended research in the past and great advances have been made in both text-based image retrieval and content-based image retrieval, only limited work has considered searching lifelog image data, and the solutions currently available have not demonstrated effective performance. In this thesis four annotation methodologies are investigated to discover their performance in a text-based image retrieval system. These methodologies include textual descriptions, tags, relevance assessment, and queries. Annotations are investigated to understand which methodology is the best to enable effective text-based image retrieval on lifelog data and then automatic image captioning is investigated to determine if textual annotations can automatically be derived. Finally, each methodology is compared in terms of the cost to manually and automatically collect annotations.
+
+The results of this research indicate that under ideal conditions, annotations which represent a query are the most effective in a retrieval task. The query annotation represents the text a user may enter into a typical search engine to retrieve an image they are looking for. This is compounded by the fact that on average they are the most cost effective annotation to collect of the four under investigation.
+\end{abstract}
+
+\copyrightpage
+
 
 
 \tableofcontents

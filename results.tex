@@ -20,14 +20,14 @@ In total, five annotators managed to annotate a total of 10,982 images across al
     \label{table:annotation-stats}
 \end{table}
 
-\begin{figure}[h]
+\begin{figure}[t]
     \centering
     \includegraphics[width=0.8\textwidth]{graphs/annotator-breakdown}
     \caption{Total number of annotations by annotator}
     \label{fig:annotator-breakdown}
 \end{figure}
 
-A statistical analysis of the collected annotations reveals that they are appropriate for a typical textual corpus. Figures \ref{fig:idf-scores} and \ref{fig:tf-scores} are what one would expect to see in a Zipfian distribution~\cite{tullo2003modelling}; that is the frequency of each concept is inversely proportional to it's rank in the frequency distribution (the most commonly used concept appears twice as many times as the second most frequent concept and three times as often as the third most frequent concept). The notion of concepts are different to terms since a concept can contain more than one word (this is possible through tags, where a tag can contain multiple words such as `shopping mall' and `street sign').
+A statistical analysis of the collected annotations reveals that they are appropriate for a typical textual corpus. Figures \ref{fig:idf-scores} and \ref{fig:tf-scores} are what one would expect to see in a Zipfian distribution~\cite{tullo2003modelling}; that is the frequency of each concept is inversely proportional to it's rank in the frequency distribution (the most commonly used concept appears twice as often as the second most frequent concept and three times as often as the third most frequent concept). The notion of concepts are different to terms since a concept can contain more than one word (this is possible through tags, where a tag can contain multiple words such as `shopping mall' and `street sign').
 
 \begin{figure}[b]
     \centering
@@ -43,14 +43,14 @@ A statistical analysis of the collected annotations reveals that they are approp
     \label{fig:tf-scores}
 \end{figure}
 
-Textual annotations accounted for the highest amount of time taken on average in the collection process. The largest number of annotations collected for a methodology are the query annotations. Qualitative feedback from annotators note that the relevance assessments are the most tedious to collect. Intuitively, formulating a query for a typical search engine does not take a very long time, which can account for the marginal average time for this annotation type. On the other hand, composing (in the annotators mind and physically typing on a keyboard) a descriptive paragraph filled with context and semantics naturally leads to the conclusion that textual annotations do, in fact, take a significant amount of time to annotate. Secondly, the process of completing a relevance assessment involves scrolling and clicking a multitude of times; this time adds up and is evident in the reported average time.
+Textual annotations accounted for the highest amount of time taken on average in the collection process. The largest number of annotations collected for a methodology are the query annotations. Qualitative feedback from annotators note that the relevance assessments are the most tedious to collect. Intuitively, formulating a query for a typical search engine does not take a very long time, which can account for the marginal average time for this annotation type. On the other hand, composing (in the annotators mind and physically typing on a keyboard) a descriptive paragraph filled with context and semantics leads to the conclusion that textual annotations do, in fact, take a significant amount of time to annotate. In the same manner, the process of completing a relevance assessment involves scrolling and clicking a multitude of times; this time adds up and is evident in the reported average time.
 
 \FloatBarrier
 \section{Retrieval Effectiveness}
 
 Results of each experiment are reported as a table which provides the results from \verb|trec_eval| and as a precision-recall graph. The results from only the manually annotated images are displayed first. Table \ref{table:manual-results} presents the \verb|trec_eval| results for the four annotation methodologies \textit{and} the result of combining all four of the methodologies. The  NTCIR-12 LSAT topics are used for experiments. Among other fields, each topic contains a title and a description; these fields are read as input queries. The title field is more representative of what a typical query looks like when issued by a user. The results of running these experiments are visualised as precision-recall graphs in Figures \ref{fig:manual-result-title} and \ref{fig:manual-result-desc}.
 
-The interesting result is the experiments that use the title field as an input: the query annotations perform the best of the four methodologies, however when combining all four collections of annotations together the effectiveness increases slightly, and the precision is higher than the query annotations at high recall. Combining annotations for the experiments that use the description field outperform all four of the methodologies, and the query annotations perform significantly worse.
+In experiments that use the title field as an input the query annotations perform the best of the four methodologies, however when combining all four collections of annotations together the effectiveness increases slightly, and the precision is higher than the query annotations at high recall (more relevant results). Combining annotations for the experiments that use the description field outperform all four of the methodologies, and the query annotations perform significantly worse.
 
 \begin{table}[ht]
     \begin{tabular}{|c|c|c|c|c|}
@@ -93,7 +93,7 @@ A neural network framework (neuraltalk2) is trained on the manual textual, tag, 
 
 There is no clear individual annotation methodology that outperforms the others, the scores are too low to indicate this. Combining the three automatic annotations together does seem to increase the overall precision. The learnt queries do retrieve the most number of images, in a similar result to the manual annotation results.
 
-The number of iterations the neural network architecture covered for each annotation methodology is visualised in Figures \ref{fig:val-loss-1} and \ref{fig:val-loss-2}. The results of the automatic captioning do not get better over time -- in fact they get worse. This is a concerning finding, and it can most likely be attributed the the lack of training examples. The gap between topics with a large number of relevant images and the number of training examples in combination with topics that contain a very low number of relevant images is presumably the contributing factor to the results in these figures.
+The number of iterations the neural network architecture covered for each annotation methodology is visualised in Figures \ref{fig:val-loss-1} and \ref{fig:val-loss-2}. The results of the automatic captioning do not get better over time -- in fact they get worse. The gap between topics with a large number of relevant images, topics with a low number of images, and the low number of training examples is presumably the contributing factor to the results in these figures.
 
 \begin{table}[ht]
     \centering
@@ -119,14 +119,14 @@ The number of iterations the neural network architecture covered for each annota
     \centering
     \includegraphics[width=0.8\textwidth]{graphs/auto-title}
     \caption{Precision-recall curves for the learnt annotations using titles}
-    \label{fig:manual-result-title}
+    \label{fig:auto-result-title}
 \end{figure}
 
 \begin{figure}[ht]
     \centering
     \includegraphics[width=0.8\textwidth]{graphs/auto-desc}
     \caption{Precision-recall curves for the learnt annotations using descriptions}
-    \label{fig:manual-result-desc}
+    \label{fig:auto-result-desc}
 \end{figure}
 
 \begin{figure}
